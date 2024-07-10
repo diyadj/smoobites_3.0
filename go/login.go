@@ -51,7 +51,7 @@ func authHandler(db *sql.DB) http.HandlerFunc {
 
 		if email == "" || password == "" {
 			http.Redirect(w, r, "/login.html?error=empty", http.StatusSeeOther)
-            return
+			return
 		}
 
 		if action == "register" {
@@ -69,7 +69,7 @@ func authHandler(db *sql.DB) http.HandlerFunc {
 				return
 			}
 
-            role := "user"
+			role := "user"
 
 			_, err = db.Exec("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)", name, email, hashedPassword, role)
 			if err != nil {
