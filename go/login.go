@@ -33,7 +33,7 @@ func checkPasswordHash(password, hash string) bool {
     return err == nil
 }
 
-func registerHandler(db *sql.DB) http.HandlerFunc {
+func authHandler(db *sql.DB) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         if r.Method != "POST" {
             http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -45,70 +45,63 @@ func registerHandler(db *sql.DB) http.HandlerFunc {
             return
         }
 
-        email := r.FormValue("email")
+        action := r.FormValue("action")
+		email := r.FormValue("email")
         password := r.FormValue("password")
+
         if email == "" || password == "" {
             http.Error(w, "Email and password are required", http.StatusBadRequest)
             return
         }
 
-        hashedPassword, err := hashPassword(password)
-        if err != nil {
-            log.Printf("Failed to hash password: %v", err)
-            http.Error(w, "Error processing the request", http.StatusInternalServerError)
-            return
-        }
-
-        _, err = db.Exec("INSERT INTO users (email, password) VALUES (?, ?)", email, hashedPassword)
-        if err != nil {
-            log.Printf("Failed to insert user: %v", err)
-            http.Error(w, "Error saving the user", http.StatusInternalServerError)
-            return
-        }
-
-        w.Header().Set("Content-Type", "text/html; charset=utf-8")
-        fmt.Fprintf(w, "<h1>Registration successful!</h1>")
-    }
-}
-
-func loginHandler(db *sql.DB) http.HandlerFunc {
-    return func(w http.ResponseWriter, r *http.Request) {
-        if r.Method != "POST" {
-            http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-            return
-        }
-
-        if err := r.ParseForm(); err != nil {
-            http.Error(w, "Error parsing the form", http.StatusBadRequest)
-            return
-        }
-
-        email := r.FormValue("email")
-        password := r.FormValue("password")
-        if email == "" || password == "" {
-            http.Error(w, "Email and password are required", http.StatusBadRequest)
-            return
-        }
-
-        var storedPassword string
-        err := db.QueryRow("SELECT password FROM users WHERE email = ?", email).Scan(&storedPassword)
-        if err != nil {
-            if err == sql.ErrNoRows {
-                http.Error(w, "Invalid email or password", http.StatusUnauthorized)
-            } else {
-                log.Printf("Failed to query user: %v", err)
-                http.Error(w, "Error querying user", http.StatusInternalServerError)
+        if action == "register" {
+            // Register user
+			name := r.FormValue("name")
+            if name == "" {
+                http.Error(w, "Name is required for registration", http.StatusBadRequest)
+                return
             }
-            return
-        }
 
-        if !checkPasswordHash(password, storedPassword) {
-            http.Error(w, "Invalid email or password", http.StatusUnauthorized)
-            return
-        }
+            hashedPassword, err := hashPassword(password)
+            if err != nil {
+                log.Printf("Failed to hash password: %v", err)
+                http.Error(w, "Error processing the request", http.StatusInternalServerError)
+                return
+            }
 
-        w.Header().Set("Content-Type", "text/html; charset=utf-8")
-        fmt.Fprintf(w, "<h1>Welcome, %s!</h1>", email)
+            _, err = db.Exec("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", name, email, hashedPassword)
+            if err != nil {
+                log.Printf("Failed to insert user: %v", err)
+                http.Error(w, "Error saving the user", http.StatusInternalServerError)
+                return
+            }
+
+            w.Header().Set("Content-Type", "text/html; charset=utf-8")
+            fmt.Fprintf(w, "<h1>Registration successful!</h1>")
+        } else if action == "login" {
+            // Login user
+            var storedPassword string
+            err := db.QueryRow("SELECT password FROM users WHERE email = ?", email).Scan(&storedPassword)
+            if err != nil {
+                if err == sql.ErrNoRows {
+                    http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+                } else {
+                    log.Printf("Failed to query user: %v", err)
+                    http.Error(w, "Error querying user", http.StatusInternalServerError)
+                }
+                return
+            }
+
+            if !checkPasswordHash(password, storedPassword) {
+                http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+                return
+            }
+
+            w.Header().Set("Content-Type", "text/html; charset=utf-8")
+            fmt.Fprintf(w, "<h1>Welcome, %s!</h1>", email)
+        } else {
+            http.Error(w, "Invalid action", http.StatusBadRequest)
+        }
     }
 }
 
@@ -131,8 +124,7 @@ func main() {
 	})
 
 	// API endpoints
-	http.HandleFunc("/register", registerHandler(db))
-	http.HandleFunc("/login", loginHandler(db))
+	http.HandleFunc("/auth", authHandler(db))
 
 	log.Println("Server started on http://localhost:5500")
 	if err := http.ListenAndServe(":5500", nil); err != nil {
