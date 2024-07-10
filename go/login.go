@@ -112,7 +112,7 @@ func main() {
 	// Serve index.html for the root URL
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-            http.ServeFile(w, r, filepath.Join("..", "login.html"))
+            http.ServeFile(w, r, filepath.Join("..", "index.html"))
         } else {
             filePath := filepath.Join("..", r.URL.Path[1:]) // Remove the leading slash
             if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -126,8 +126,8 @@ func main() {
 	// API endpoints
 	http.HandleFunc("/auth", authHandler(db))
 
-	log.Println("Server started on http://localhost:8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	log.Println("Server started on http://localhost:5500")
+	if err := http.ListenAndServe(":5500", nil); err != nil {
 		log.Fatal(err)
 	}
 }
