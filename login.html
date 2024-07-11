@@ -327,6 +327,16 @@ footer a {
         signInButton.addEventListener('click', () => {
             container.classList.remove("right-panel-active");
         });
+
+		// Check if there's an error parameter in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error === 'empty') {
+            alert('Please enter both email and password.');
+        } else if (error === 'invalid') {
+            alert('Invalid email or password.');
+        }
     </script>
 </body>
 </html>
