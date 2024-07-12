@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Delfood</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- nice select -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+        integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+    <!-- slick slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+        integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map"
+        integrity="undefined" crossorigin="anonymous" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <!-- ezPlus CSS -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.ez-plus.min.css"
+        integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+
+    <!-- Custom CSS for Image Dimensions -->
+    <style>
+        .preview-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            /* Ensures the image covers the area, preserving aspect ratio */
+        }
+
+        .scrollable-container {
+            max-height: 150px;
+            /* Adjust height as needed */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            /* Optional: for visual clarity */
+            padding: 10px;
+            /* Optional: for better spacing */
+        }
+
+        .addon-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .addon-row .form-control {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .addon-row .btn-danger {
+            flex: 0;
+        }
+
+        .invalid-feedback {
+            display: none;
+            /* Ensure the feedback is displayed */
+            color: red;
+            /* Red text for the invalid feedback */
+        }
+
+        .form-control.is-invalid+.invalid-feedback {
+            display: block;
+        }
+
+        .form-control.is-invalid {
+            border-color: red;
+            /* Red border for invalid inputs */
+        }
+
+        .food-addons-label {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .food-addons {
+            margin-top: 10px;
+        }
+
+        .addon-price {
+            font-size: 0.9em;
+            color: grey;
+        }
+
+        .scrollable-addons-container {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .User_option {
+      position: relative;
+      display: inline-block;
+    }
+
+    .User_option .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .User_option:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    </style>
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <!-- header section starts -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>
+                            Smoobites
+                        </span>
+                    </a>
+                    <div class="" id="">
+                        <div class="User_option">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span id="user-greeting"><a href="login.html" role="button">Login</a></span>
+                            <div class="dropdown-content">
+                              <a href="#" id="logout-button">Logout</a>
+                            </div>
+                          </div>
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <img src="images/menu.png" alt="">
+                            </button>
+                            <div id="myNav" class="overlay">
+                                <div class="overlay-content">
+                                    <a href="index.html">Home</a>
+                                    <a href="about.html">About</a>
+                                    <a href="blog.html">Blog</a>
+                                    <a href="testimonial.html">Testimonial</a>
+                                </div>
+                            </div>
+                        </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+    </div>
+
+    <!-- add section -->
+
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>Edit Food Item</h2>
+            </div>
+            <div class="box" style="padding-top: 50px;">
+                <div class="p-5 mb-4 bg-light rounded-3 " style="height: 1100px">
+                    <div class="container-fluid ">
+                        <div class="row g-5">
+                            <div class="col-md-5 col-lg-4 order-md-last">
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span style="color: #13315C;">Preview</span>
+                                </h4>
+                                <div id="imagePreview">
+                                    <img id="previewImg" src="#" alt="Your Image" class="preview-image"
+                                        style="display:none;" data-zoom-image="#" />
+                                </div>
+                                <div id="textPreview">
+                                    <h4 id="previewName">Sample Food</h4>
+                                    <p id="previewDescription">Sample Description</p>
+                                    <p id="previewPrice">$10.00</p>
+                                    <div class="food-addons-label">Add-ons:</div>
+                                    <div class="scrollable-container" id="foodAddonsContainer">
+                                        <div class="addon-label" data-index="1">
+                                            <input type="text" class="form-control addon-name" value="Addon 1" data-index="1" oninput="updateAddon(this)">
+                                            <input type="text" class="form-control addon-price" value="$1.00" data-index="1" oninput="updateAddon(this)">
+                                            <button type="button" class="btn btn-danger" onclick="removeAddonPreview(this)">Delete</button>
+                                        </div>
+                                        <div class="addon-label" data-index="2">
+                                            <input type="text" class="form-control addon-name" value="Addon 2" data-index="2" oninput="updateAddon(this)">
+                                            <input type="text" class="form-control addon-price" value="$2.00" data-index="2" oninput="updateAddon(this)">
+                                            <button type="button" class="btn btn-danger" onclick="removeAddonPreview(this)">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 col-lg-8">
+                                <h4 class="mb-3" style="color: #13315C;">Edit item</h4>
+                                <form id="foodForm" class="needs-validation" novalidate="" enctype="multipart/form-data"
+                                    action="/update-food-item" method="POST">
+
+                                    <div class="row g-3">
+                                        <div class="col-sm-12">
+                                            <label for="foodName" class="form-label" style="float: left;">Food
+                                                name</label>
+                                            <input type="text" class="form-control" id="foodName" name="foodName"
+                                                placeholder="" value="" required="" fdprocessedid="0ixsjd"
+                                                oninput="updatePreview('foodName', 'previewName')">
+                                            <div class="invalid-feedback">
+                                                Please provide a valid food name.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label"
+                                                    style="float: left; padding-top: 20px;">Description <span
+                                                        class="text-muted">(Optional)</span></label>
+                                                <textarea class="form-control" id="description" name="description"
+                                                    rows="3"
+                                                    oninput="updatePreview('description', 'previewDescription')"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="price" class="form-label" style="float: left;">Price</label>
+                                            <input type="text" class="form-control" id="price" name="price"
+                                                placeholder="$" value="" required="" fdprocessedid="0ixsjd"
+                                                oninput="updatePreview('price', 'previewPrice')">
+                                            <div class="invalid-feedback">
+                                                Please provide a valid food price.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="prepTime" class="form-label"
+                                                style="float: left; padding-top: 20px;">Preparation time<span
+                                                    class="text-muted">(In Minutes)</span> </label>
+                                            <input type="text" class="form-control" id="prepTime" name="prepTime"
+                                                placeholder="" value="" required="" fdprocessedid="0ixsjd">
+                                            <div class="invalid-feedback">
+                                                Please provide a valid preparation time.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="foodImage" class="form-label"
+                                                style="float: left; padding-top: 20px;">Food Image</label>
+                                            <input type="file" class="form-control" id="foodImage" accept="image/*"
+                                                name="foodImage" onchange="previewImage(event)">
+                                            <input type="hidden" id="foodImageURL" name="foodImageURL">
+                                            <div class="invalid-feedback">
+                                                Please upload a food image.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Add-ons Section Start -->
+                                    <h5 class="mb-3" style="color: #13315C;">Add-ons</h5>
+                                    <div class="scrollable-addons-container" id="addons-container"></div>
+                                    <button type="button" class="btn btn-outline-primary mt-2" id="add-addon-button"
+                                        onclick="addAddon()">Add Add-on</button>
+                                    <hr class="my-4">
+                                    <!-- Add-ons Section End -->
+
+                                    <button type="submit" class="btn btn-outline-success"
+                                        style="background-color: #699677; border-color: #699677; color: white; width: 100%;">Update</button>
+                                    <input type="hidden" name="vendorId"
+                                        value="1"><!-- dynamically insert the vendor ID here -->
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end about section -->
+
+    <div class="footer_container">
+        <!-- info section -->
+        <section class="info_section ">
+            <div class="container">
+                <div class="contact_box">
+                    <a href="">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="info_links">
+                    <ul>
+                        <li class="active">
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="blog.html">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="review.html">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="social_box">
+                    <a href="">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- end info_section -->
+
+        <!-- footer section -->
+        <footer class="footer_section">
+            <div class="container">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    SMU Smoobites Heaps <br>
+                </p>
+            </div>
+        </footer>
+        <!-- footer section -->
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
+        crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.js"></script>
+    <!-- slick slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
+        integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+    <!-- DataTables JS -->
+    <!-- ezPlus JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.ez-plus.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
+        crossorigin="anonymous"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Fetch session info and update the login/logout state
+                fetch('/session-info')
+                    .then(response => response.json())
+                    .then(data => {
+                        const userGreeting = document.getElementById('user-greeting');
+                        const logoutButton = document.getElementById('logout-button');
+        
+                        if (data.user) {
+                            userGreeting.innerHTML = `Hi ${data.user} (${data.role})!`;
+                            logoutButton.style.display = 'block';
+                        } else {
+                            userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
+                            logoutButton.style.display = 'none';
+                        }
+                    });
+        
+                // Handle logout button click
+                document.getElementById('logout-button').addEventListener('click', function () {
+                    fetch('/logout')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'logged out') {
+                                const userGreeting = document.getElementById('user-greeting');
+                                const logoutButton = document.getElementById('logout-button');
+                                userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
+                                logoutButton.style.display = 'none';
+                            }
+                        });
+                });
+        
+                // Fetch food item details and update the form
+                fetch('/get-food-item') // This endpoint should retrieve data based on session values
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('foodName').value = data.food_name;
+                        document.getElementById('description').value = data.description;
+                        document.getElementById('price').value = data.price;
+                        document.getElementById('prepTime').value = data.prep_time;
+        
+                        var imagePath = data.image_path.replace(/\\/g, '/');
+                        const img = document.getElementById('previewImg');
+                        img.src = `go/${imagePath}`;
+                        img.style.display = 'block';
+        
+                        document.getElementById('foodImageURL').value = `go/${imagePath}`;
+        
+                        document.getElementById('previewName').textContent = data.food_name;
+                        document.getElementById('previewDescription').textContent = data.description;
+                        document.getElementById('previewPrice').textContent = `$${data.price.toFixed(2)}`;
+        
+                        const foodAddonsContainer = document.getElementById('foodAddonsContainer');
+                        foodAddonsContainer.innerHTML = '';
+                        if (data.addons && data.addons.length > 0) {
+                            data.addons.forEach((addon, index) => {
+                                const addonDiv = document.createElement('div');
+                                addonDiv.classList.add('addon-label');
+                                addonDiv.dataset.index = index;
+                                addonDiv.innerHTML = `
+                                    <input type="text" class="form-control addon-name" value="${addon.name}" data-index="${index}" oninput="updateAddon(this)">
+                                    <input type="text" class="form-control addon-price" value="${addon.price.toFixed(2)}" data-index="${index}" oninput="updateAddon(this)">
+                                    <button type="button" class="btn btn-danger" onclick="removeAddonPreview(this)">Delete</button>
+                                `;
+                                foodAddonsContainer.appendChild(addonDiv);
+                            });
+                            addonCount = data.addons.length;
+                        } else {
+                            foodAddonsContainer.innerHTML = '<p>None</p>';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching food item:', error));
+        
+                // Function to update preview
+                function updatePreview(inputId, previewId) {
+                    var input = document.getElementById(inputId);
+                    var preview = document.getElementById(previewId);
+                    preview.textContent = input.value;
+                }
+        
+                // Function to preview image
+                function previewImage(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = document.getElementById('previewImg');
+                        var imageUrl = reader.result;
+                        output.src = imageUrl;
+                        output.style.display = 'block';
+                        $('#previewImg').data('zoom-image', imageUrl).ezPlus();
+        
+                        // Set the image URL in the hidden input field
+                        document.getElementById('foodImageURL').value = imageUrl;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+        
+                let addonCount = 0;
+                const maxAddons = 10;
+        
+                // Function to add addon
+                function addAddon(name = '', price = '') {
+                    if (addonCount >= maxAddons) {
+                        alert('You can only add up to 10 add-ons.');
+                        return;
+                    }
+        
+                    addonCount++;
+        
+                    const container = document.getElementById('addons-container');
+                    const div = document.createElement('div');
+                    div.classList.add('row', 'g-3', 'mb-2', 'addon-row');
+                    div.innerHTML = `
+                        <div class="col-5">
+                            <input type="text" class="form-control" placeholder="Add-on's Name" name="addonName${addonCount}" value="${name}" required>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" class="form-control" placeholder="Price" name="addonPrice${addonCount}" value="${price}" required>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-danger" onclick="removeAddon(this)">Delete</button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+        
+                    if (addonCount > 3) {
+                        container.classList.add('scrollable-addons-container');
+                    } else {
+                        container.classList.remove('scrollable-addons-container');
+                    }
+                }
+        
+                // Function to remove addon
+                function removeAddon(button) {
+                    const row = button.parentElement.parentElement;
+                    row.remove();
+                    addonCount--;
+        
+                    if (addonCount <= 3) {
+                        document.getElementById('addons-container').classList.remove('scrollable-addons-container');
+                    }
+                }
+        
+                // Function to remove addon preview
+                function removeAddonPreview(button) {
+                    const row = button.parentElement;
+                    row.remove();
+                    addonCount--;
+        
+                    if (addonCount <= 3) {
+                        document.getElementById('foodAddonsContainer').classList.remove('scrollable-container');
+                    }
+                }
+        
+                // Function to update addon
+                function updateAddon(input) {
+                    const index = input.dataset.index;
+                    const nameInput = document.querySelector(`.addon-name[data-index="${index}"]`);
+                    const priceInput = document.querySelector(`.addon-price[data-index="${index}"]`);
+                }
+        
+                // Function to validate form
+                function validateForm() {
+                    let isValid = true;
+        
+                    const foodName = document.getElementById('foodName');
+                    const price = document.getElementById('price');
+                    const prepTime = document.getElementById('prepTime');
+                    const foodImage = document.getElementById('foodImage');
+        
+                    if (!foodName.value.trim()) {
+                        foodName.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        foodName.classList.remove('is-invalid');
+                    }
+        
+                    if (!price.value.trim()) {
+                        price.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        price.classList.remove('is-invalid');
+                    }
+        
+                    if (!prepTime.value.trim()) {
+                        prepTime.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        prepTime.classList.remove('is-invalid');
+                    }
+        
+                    if (foodImage.files.length === 0) {
+                        foodImage.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        foodImage.classList.remove('is-invalid');
+                    }
+        
+                    return isValid;
+                }
+        
+                // Function to submit form
+                function submitForm(event) {
+                    event.preventDefault(); // Prevent form from submitting the default way
+        
+                    if (!validateForm()) {
+                        return;
+                    }
+        
+                    // Combine add-ons from both preview and edit sections
+                    let allAddons = [];
+                    document.querySelectorAll('.addon-row input').forEach(input => {
+                        const name = input.name.startsWith('addonName') ? input.value : '';
+                        const price = input.name.startsWith('addonPrice') ? input.value : '';
+                        if (name && price) {
+                            allAddons.push({ name, price });
+                        }
+                    });
+                    document.querySelectorAll('.addon-label').forEach(label => {
+                        const name = label.querySelector('.addon-name').value;
+                        const price = label.querySelector('.addon-price').value;
+                        if (name && price) {
+                            allAddons.push({ name, price });
+                        }
+                    });
+        
+                    const form = document.getElementById('foodForm');
+                    const formData = new FormData(form);
+        
+                    // Add combined add-ons to the form data
+                    allAddons.forEach((addon, index) => {
+                        formData.append(`addonName${index + 1}`, addon.name);
+                        formData.append(`addonPrice${index + 1}`, addon.price);
+                    });
+        
+                    fetch('/update-food-item', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.text().then(text => { throw new Error(text); });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Response received:', data);
+                            if (data.success) {
+                                console.log('Success:', data.message);
+                                alert('Food item updated successfully');
+                                window.location.href = 'vmanage.html'; // Redirect to vmanage.html
+                            } else {
+                                console.log('Error:', data.message);
+                                alert('Error: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Fetch error:', error);
+                            alert('An error occurred while updating the food item: ' + error.message);
+                        });
+                }
+        
+                document.getElementById('foodForm').addEventListener('submit', submitForm);
+            });
+        </script>
+        
+
+</body>
+
+</html>
