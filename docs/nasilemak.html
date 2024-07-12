@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <!-- <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        /> -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css" />
+        <script src="./js/jquery.min.js"></script>
+        <link rel="icon" href="./img/icon.png" />
+        <title>Nasi Lemak Ayam Taliwang</title>
+    </head>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white"> <a class="navbar-brand" href="./index.html"><img src="./logo.png"></a>
+        <button
+        class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="./nasilemak.html">Nasi Lemak Ayam Taliwang<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"> <a class="nav-link" href="./khoon.html">Khoon Coffeehouse Express</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="./teaparty.html">The Tea Party Express</a> </li>
+                    <!-- <li class="nav-item"> <a class="nav-link" href="./nasilemak.html">Nasi Lemak Ayam Taliwang</a></li> -->
+                </ul> 
+            </div>
+    </nav>
+    
+    <body>
+        <div class="block hero1 my-auto" style="background-image:url(./nasilemakimg/nasi.png);">
+            <div class="container-fluid text-center">
+                 <h1 class="display-2 text-white" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-offset="0">Nasi Lemak Ayam Taliwang</h1>
+                <!-- <p class="lead text-white" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-delay="600">We are closed for the moment, but we will still deliver food at your place!</p> -->
+                <a
+                href="#menu" class="btn-text lead d-inline-block text-white border-top border-bottom mt-4 pt-1 pb-1"
+                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1200">View Today's Menu</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="maincontent">
+            <div class="container">
+                <section id="menu">
+                    <div class="block menu1">
+                        <div class="buttons-container"> 
+                            <a href="#" class="button button--is-active" data-target="package">Value Package Meal</a>
+                            <a href="#" class="button" data-target="set">Set Meals</a> 
+                            <a href="#" class="button" data-target="grilledchicken">Grilled Chicken Set Meal</a>
+                            <a href="#" class="button" data-target="drinks">Drinks</a>
+                        </div>
+                        <!-- Start Package -->
+                        <div class="menu menu--is-visible" id="package" data-aos="fade-up">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-1.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Family Pack Set Meal</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$25.90</span>
+                                    </div>
+                                    <p class="item__description">2 Jumbo set, 1 Kiddy meal with chix katsudon,
+                                    1 Fish fillet set and 4 Drinks</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="1" data-name="Family Pack Set Meal" data-price="25.90" data-quantity="1"
+                                    data-image="./img/pizza-1.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-2.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Couples Pack Set Meal</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$17.10</span>
+                                    </div>
+                                    <p class="item__description">1 Jumbo Set, 1 Chix & Otah Set and 2 Drinks</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="2" data-name="Couples Pack Set Meal" data-price="17.10" data-quantity="1"
+                                    data-image="./img/pizza-2.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-3.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">The Triplet Threat</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$25.70</span>
+                                    </div>
+                                    <p class="item__description">1 Taliwang Set,1 Balado Set,1 Cabe Ijo Set, 3 Drinks.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="3" data-name="The Triple Threat" data-price="25.70" data-quantity="1"
+                                    data-image="./img/pizza-3.png">Add to cart</button>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!-- End package -->
+                        <!-- Start Set -->
+                        <div class="menu" id="set">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Chicken Fillet Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$5.60</span>
+                                    </div>
+                                    <p class="item__description">Rice infused with fresh undiluted coconut cream,
+                                    crunchy ground peanut and peeled anchovies, traditional sambal cooked in slow heat
+                                    for over 5 hours and included gula melaka, dried shrimps, belachan, Sliced Cucumber, 
+                                    Freshly fried sunny side up eggs, thick breaded fish fillet, 
+                                    begedel in egg coating - malay traditional fried mashed potatoes</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="4" data-name="Chicken Fillet Set" data-price="5.60" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Chicken & Selar Fish Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.50</span>
+                                    </div>
+                                    <p class="item__description">Rice infused with fresh undiluted coconut cream,
+                                    crunchy ground peanut and peeled anchovies, traditional sambal cooked in slow
+                                    heat for over 5 hours and included gula melaka, dried shrimps, belachan, etc,
+                                    sliced cucumber, freshly fried sunny side up eggs, traditionally marinated fried
+                                    chicken wing, fried selar fish</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="5" data-name="Chicken & Selar Fish Set" data-price="6.50" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Jumbo Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="6" data-name="Jumbo Set" data-price="7.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+            
+                        </div>
+                        <!-- End set Menu -->
+                        <!-- Start grilled chicken -->
+                        <div class="menu" id="grilled chicken">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Nasi Lemak Ayam Taliwang Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.50</span>
+                                    </div>
+                                    <p class="item__description">Rice infused with fresh undiluted coconut cream,
+                                    crunchy ground peanut and peeled anchovies, traditional sambal cooked in slow
+                                    heat for over 5 hours and included gula melaka, dried shrimps, belachan, 
+                                    sliced cucumber, freshly fried sunny side up eggs, Qtr leg chicken marinated
+                                    in traditional home-made taliwang  red chilli and chilli padi sauce</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="7" data-name="Nasi Lemak Ayam Taliwang Set" data-price="7.50" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Nasi Lemak Ayam Balado Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.50</span>
+                                    </div>
+                                    <p class="item__description">Rice infused with fresh undiluted coconut cream,
+                                        crunchy ground peanut and peeled anchovies, traditional sambal cooked in slow
+                                        heat for over 5 hours and included gula melaka, dried shrimps, belachan, 
+                                        sliced cucumber, freshly fried sunny side up eggs, Qtr leg chicken marinated
+                                        in traditional home-made balado red chilli and chilli padi sauce</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="8" data-name="Nasi Lemak Ayam Balado Set" data-price="7.50" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Nasi Lemak Ayam Cabe Ijo Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.50</span>
+                                    </div>
+                                    <p class="item__description">Rice infused with fresh undiluted coconut cream,
+                                        crunchy ground peanut and peeled anchovies, traditional sambal cooked in slow
+                                        heat for over 5 hours and included gula melaka, dried shrimps, belachan, 
+                                        sliced cucumber, freshly fried sunny side up eggs, Qtr leg chicken marinated
+                                        in traditional home-made balado red chilli and chilli padi sauce</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="9" data-name="Nasi Lemak Ayam Cabe Ijo Set" data-price="7.50" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- End grilled chicken -->
+                         <!-- Start Drinks Menu -->
+                        <div class="menu" id="drinks">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Coke</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.90</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="10" data-name="Coke" data-price="1.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">100 Plus</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.90</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="11" data-name="100 Plus" data-price="1.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Lemon Tea</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.90</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="12" data-name="Lemon Tea" data-price="1.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Green Tea</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.90</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="13" data-name="Green Tea" data-price="1.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Drinks Menu -->
+                    </div>
+                    <!-- End block -->
+                    <script src="./js/mycart.js"></script>
+                    <script src="./js/mycart-custom.js"></script>
+                </section>
+            </div>
+        </div>
+        <div class="nav-item my-cart-icon">
+            <img src="./img/cart.svg" style="width:20px;"> <span class="badge badge-notify my-cart-badge"> </span>
+        </div>
+        <footer class="block footer1 footer text-center">
+            <p>&copy; <a href="https://bootstrapstarter.com/bootstrap-templates/template-fooddelivery-bootstrap-html/">"Food Delivery HTML Template"</a> by
+                WowThemes.net</p>
+        </footer>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="js/custom-general.js"></script>
+    </body>
+
+</html>
