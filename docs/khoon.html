@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        /> 
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css" />
+        <script src="./js/jquery.min.js"></script>
+        <link rel="icon" href="./img/icon.png" />
+        <title>Khoon Coffeehouse Express</title>
+    </head>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white"> <a class="navbar-brand" href="./index.html"><img src="./logo.png"></a>
+        <button
+        class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="./khoon.html">Khoon Coffeehouse Express<span class="sr-only">(current)</span></a></li>
+                    <!-- <li class="nav-item"> <a class="nav-link" href="./khoon.html">Khoon Coffeehouse Express</a></li> -->
+                    <li class="nav-item"> <a class="nav-link" href="./teaparty.html">The Tea Party Express</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="./nasilemak.html">Nasi Lemak Ayam Taliwang</a></li>
+                </ul> 
+            </div>
+    </nav>
+     
+    <body>
+        <div class="block hero1 my-auto" style="background-image:url(./khoonimg/stack.png)">
+            <div class="container-fluid text-center">
+                 <h1 class="display-2 text-white" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-offset="0">Khoon Coffeehouse Express</h1>
+                <!-- <p class="lead text-white" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-delay="600">We are closed for the moment, but we will still deliver food at your place!</p> -->
+                <a
+                href="#menu" class="btn-text lead d-inline-block text-white border-top border-bottom mt-4 pt-1 pb-1"
+                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1200">View Today's Menu</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="maincontent">
+            <div class="container">
+                <section id="menu">
+                    <div class="block menu1">
+                        <div class="buttons-container"> 
+                            <a href="#" class="button button--is-active" data-target="bakedrice">Baked Rice Set</a>
+                            <a href="#" class="button" data-target="noodle">Noodle Set</a> 
+                            <a href="#" class="button" data-target="bun">Sweet Bun</a>
+                            <a href="#" class="button" data-target="burger">Burger Set</a>
+                            <a href="#" class="button" data-target="drinks">Drinks</a>
+                        </div>
+                        <!-- Start Baked Rice -->
+                        <div class="menu menu--is-visible" id="bakedrice" data-aos="fade-up">
+                            <!-- item 1 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5"> -->
+                                    <!-- <img class="product-img" src="./img/pizza-1.png">
+                                </div>
+                                <div class="details col-sm-9">-->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Creamy Mushroom Baked Rice Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.20</span>
+                                    </div>
+                                    <p class="item__description">Vegetarian, Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="1" data-name="Creamy Mushroom Baked Rice Set" data-price="6.20" data-quantity="1"
+                                    data-image="./img/pizza-1.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-2.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Tomato Mushroom Baked Rice Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.20</span>
+                                    </div>
+                                    <p class="item__description">Vegetarian, Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="2" data-name="Tomato Mushroom Baked Rice Set" data-price="6.20" data-quantity="1"
+                                    data-image="./img/pizza-2.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-3.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Tomato Chicken Sausage Baked Rice Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.60</span>
+                                    </div>
+                                    <p class="item__description">Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="3" data-name="Tomato Chicken Sausage Baked Rice Set" data-price="7.60" data-quantity="1"
+                                    data-image="./img/pizza-3.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Creamy Chicken Sausage Baked Rice Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.60</span>
+                                    </div>
+                                    <p class="item__description">Comes with Iced Lemon Tea.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="4" data-name="Lotus Biscoff Jiak Roti" data-price="3.60" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <!-- End Baked Rice -->
+                        <!-- Start Noodle Set -->
+                        <div class="menu" id="noodle">
+                            <!-- item 1 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div> -->
+                                <!-- <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Sarawak Seafood Noodle Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$8.30</span>
+                                    </div>
+                                    <p class="item__description">Noodle in traditional sarawak black sauce. 
+                                    Comes with scallop, fish roe ball, ramen egg, prawn & vegetable.
+                                    Comes with Iced Lemon Tea.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="5" data-name="Sarawak Seafood Noodle Set" data-price="8.30" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./khoonimg/pork.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Taiwanese Braised Pork Noodle Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$8.30</span>
+                                    </div>
+                                    <p class="item__description">Comes with Iced Lemon Tea.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="6" data-name="Taiwanese Braised Pork Noodle Set" data-price="8.30" data-quantity="1"
+                                    data-image="./khoonimg/pork.png">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Noodle Menu -->
+                        <!-- Start Bun Menu -->
+                        <div class="menu" id="bun">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./khoonimg/biscoff-bun.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Lotus Biscoff</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$3.60</span>
+                                    </div>
+                                    <p class="item__description">Signature</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="7" data-name="Lotus Biscoff" data-price="3.60" data-quantity="1"
+                                    data-image="./khoonimg/biscoff-bun.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./khoonimg/honey.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Honey Butter</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$3.50</span>
+                                    </div>
+                                    <p class="item__description">Signature</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="8" data-name="Honey Butter" data-price="3.50" data-quantity="1"
+                                    data-image="./khoonimg/honey.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./khoonimg/kaya.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Kaya Milk</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$3.20</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="9" data-name="Kaya Milk" data-price="3.20" data-quantity="1"
+                                    data-image="./khoonimg/kaya.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./khoonimg/peanut.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Peanut Butter</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$3.20</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="10" data-name="Peanut Butter" data-price="3.20" data-quantity="1"
+                                    data-image="./khoonimg/peanut.png">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End bun Menu -->
+                         <!-- Start Burger Menu -->
+                        <div class="menu" id="burger">
+                            <!-- item 1 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Chicken Sausage with Egg Burger Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.90</span>
+                                    </div>
+                                    <p class="item__description">Signature. Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="11" data-name="Chicken Sausage withe Egg Burger Set" data-price="6.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Creamy Lemon Butter Fish Burger Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.90</span>
+                                    </div>
+                                    <p class="item__description">Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="12" data-name="Creamy Lemon Butter Fish Burger Set" data-price="6.90" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Creamy Plum Mayo Prawn Burger Set</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$7.30</span>
+                                    </div>
+                                    <p class="item__description">Comes with Iced Lemon Tea</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="13" data-name="Creamy Plum Mayo Prawn Burger Set" data-price="7.30" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>            
+                        </div>
+                        <!-- End Burger Menu -->
+                         <!-- Start Drinks Menu -->
+                        <div class="menu" id="drinks">
+                            <!-- item 1 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Khoon Original Milk Tea</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$4.40</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="14" data-name="Khoon Original Milk Tea" data-price="4.40" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Coconut Foam Coffee</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$5.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="15" data-name="Coconut Foam Coffee" data-price="5.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Matcha Coffee</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$4.70</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="16" data-name="Matcha Coffee" data-price="4.70" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Mocha Coffee</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$4.40</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="17" data-name="Mocha Coffee" data-price="4.40" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <!-- End Drinks Menu -->
+                    </div>
+                    <!-- End block -->
+                    <script src="./js/mycart.js"></script>
+                    <script src="./js/mycart-custom.js"></script>
+                </section>
+            </div>
+        </div>
+        <div class="nav-item my-cart-icon">
+            <img src="./img/cart.svg" style="width:20px;"> <span class="badge badge-notify my-cart-badge"> </span>
+        </div>
+        <footer class="block footer1 footer text-center">
+            <p>&copy; <a href="https://bootstrapstarter.com/bootstrap-templates/template-fooddelivery-bootstrap-html/">"Food Delivery HTML Template"</a> by
+                WowThemes.net</p>
+        </footer>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="js/custom-general.js"></script>
+    </body>
+
+</html>
