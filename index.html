@@ -14,7 +14,6 @@
 
   <title>Smoobites</title>
 
-
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
@@ -25,22 +24,51 @@
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- nice select -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
-  <!-- slidck slider -->
+  <!-- slick slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map" integrity="undefined" crossorigin="anonymous" />
-
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <style>
+    .User_option {
+      position: relative;
+      display: inline-block;
+    }
+
+    .User_option .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .User_option:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+  </style>
 </head>
 
 <body>
 
   <div class="hero_area">
-    <!-- header section strats -->
+    <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -51,17 +79,13 @@
           </a>
           <div class="" id="">
             <div class="User_option">
-              
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <a href="login.html" role="button"><span>Login</span></a>
-              </a>
-              <form class="form-inline ">
-                <input type="search" placeholder="Search" />
-                <button class="btn  nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span id="user-greeting"><a href="login.html" role="button">Login</a></span>
+              <div class="dropdown-content">
+                <a href="#" id="logout-button">Logout</a>
+              </div>
             </div>
+            
             <div class="custom_menu-btn">
               <button onclick="openNav()">
                 <img src="images/menu.png" alt="">
@@ -497,6 +521,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch('/session-info')
+        .then(response => response.json())
+        .then(data => {
+          const userGreeting = document.getElementById('user-greeting');
+          const logoutButton = document.getElementById('logout-button');
+
+          if (data.user) {
+            userGreeting.innerHTML = `Hi ${data.user} (${data.role})!`;
+            logoutButton.style.display = 'block';
+          } else {
+            userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
+            logoutButton.style.display = 'none';
+          }
+        });
+
+      document.getElementById('logout-button').addEventListener('click', function () {
+        fetch('/logout')
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'logged out') {
+              const userGreeting = document.getElementById('user-greeting');
+              const logoutButton = document.getElementById('logout-button');
+              userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
+              logoutButton.style.display = 'none';
+            }
+          });
+      });
+    });
+  </script>
 
 
 </body>
