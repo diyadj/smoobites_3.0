@@ -12,28 +12,414 @@
         <link rel="icon" href="./img/icon.png" />
         <title>SCIS1</title>
     </head>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white"> <a class="navbar-brand" href="./index.html"><img src="./logo.png"></a>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white"> <a class="navbar-brand" href="../index.html"><img src="./logo.png"></a>
         <button
         class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <!-- <li class="nav-item active"> <a class="nav-link" href="./landing.html">SOE<span class="sr-only">(current)</span></a></li> -->
-                    <li class="nav-item"> <a class="nav-link" href="./subway.html">Subway</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="./providence.html">Providence</a> </li>                
+                    <li class="nav-item active"> <a class="nav-link" href="./scis1landing.html">SCIS 1<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"> <a class="nav-link" href="./soelanding.html">SOE/SCIS 2</a></li>
+                    <!-- <li class="nav-item"> <a class="nav-link" href="./providence.html">Providence</a> </li>                 -->
                 </ul> 
             </div>
     </nav>
     
     <body>
-        <div class="block hero1 my-auto" style="background-image:url(https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80);">
+        <div class="block hero1 my-auto" style="background-image:url(./scis1.png);">
             <div class="container-fluid text-center">
                  <h1 class="display-2 text-white" data-aos="fade-up" data-aos-duration="1000"
                 data-aos-offset="0">SCIS1</h1>
             </div>
             <div class="clearfix"></div>
-        
+        </div>
+        <div class="maincontent">
+            <div class="container">
+                <section id="menu">
+                    <div class="block menu1">
+                        <div class="buttons-container"> 
+                            <a href="#" class="button button--is-active" data-target="subway">Subway</a>
+                            
+                            <a href="#" class="button" data-target="providence">Providence</a>        
+                        </div>
+                        <!-- Start subway -->
+                        <div class="menu menu--is-visible" id="subway" data-aos="fade-up">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/italian.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Italian B.M.T</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$10.20</span>
+                                    </div>
+                                    <p class="item__description">An old-world favorite. Sliced beef salami,
+                                        beef pepperoni and chicken ham and your choice of fresh vegetables and 
+                                        condiments served on freshly baked bread. Some say B.M.T. stands for biggest, 
+                                        meatiest, tastiest. We wouldn't disagree..</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="1" data-name="Italian B.M.T" data-price="10.20" data-quantity="1"
+                                    data-image="./subimg/italian.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/bulgogi.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Bulgogi Chicken</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$8.40</span>
+                                    </div>
+                                    <p class="item__description">Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="2" data-name="Bulgogi Chicken" data-price="8.40" data-quantity="1"
+                                    data-image="./subimg/bulgogi.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/egg.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Egg Mayo</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$6.90</span>
+                                    </div>
+                                    <p class="item__description">Our delicious concoction of hard boiled eggs and Mayonnaise.
+                                    It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="3" data-name="Egg Mayo" data-price="6.90" data-quantity="1"
+                                    data-image="./subimg/egg.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/veggie.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Veggie Patty</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$9.10</span>
+                                    </div>
+                                    <p class="item__description">If you're a vegetarian or even a carnivore with
+                                    a taste for green, you have to try this tasty vegetarian selection. 
+                                    The patty is made from vegetables and brown rice and its own unique spices. 
+                                    It's one of our favorites.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="4" data-name="Veggie Patty" data-price="9.10" data-quantity="1"
+                                    data-image="./subimg/veggie.png">Add to cart</button>
+                                </div>
+                            </div>
+                        
+                            <!-- End six -->
+                            <!-- Start twelve -->
+                        
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/italian.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Italian B.M.T</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$15.70</span>
+                                    </div>
+                                    <p class="item__description">An old-world favorite. Sliced beef salami,
+                                    beef pepperoni and chicken ham and your choice of fresh vegetables and 
+                                    condiments served on freshly baked bread. Some say B.M.T. stands for biggest, 
+                                    meatiest, tastiest. We wouldn't disagree.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="5" data-name="Italian B.M.T" data-price="15.70" data-quantity="1"
+                                    data-image="./subimg/italian.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/bulgogi.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Bulgogi Chicken</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$13.90</span>
+                                    </div>
+                                    <p class="item__description">Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="6" data-name="Bulgogi Chicken" data-price="13.90" data-quantity="1"
+                                    data-image="./subimg/bulgogi.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/egg.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Egg Mayo</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$12.40</span>
+                                    </div>
+                                    <p class="item__description">Our delicious concoction of hard boiled eggs and Mayonnaise.
+                                    It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="7" data-name="Egg Mayo" data-price="12.40" data-quantity="1"
+                                    data-image="./subimg/egg.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./subimg/veggie.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Veggie Patty</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$14.60</span>
+                                    </div>
+                                    <p class="item__description">If you're a vegetarian or even a carnivore with
+                                        a taste for green, you have to try this tasty vegetarian selection. 
+                                        The patty is made from vegetables and brown rice and its own unique spices. 
+                                        It's one of our favorites.</p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="8" data-name="Veggie Patty" data-price="14.60" data-quantity="1"
+                                    data-image="./subimg/veggie.png">Add to cart</button>
+                                </div>
+                            </div>
+                        
+                            <!-- End twelve Menu -->
+                            <!-- Start salad -->
+                        
+                            <!-- item 1 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Italian B.M.T</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$12.40</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="9" data-name="Italian B.M.T" data-price="12.40" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Bulgogi Chicken</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$10.60</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="10" data-name="Bulgogi Chicken" data-price="10.60" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Egg Mayo</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$9.10</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="11" data-name="Egg Mayo" data-price="9.10" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item">
+                                <!-- <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9"> -->
+                                    <div class="item__header">
+                                         <h3 class="item__title">Veggie Patty</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$11.30</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="12" data-name="Veggie Patty" data-price="11.30" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                <!-- </div> -->
+                            </div>
+                        </div> 
+                        <!-- End subway -->
+                         <!-- start providence menu -->
+                        <div class="menu" id="providence">
+                            <!-- item 1 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-1.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Chocolate Croissant</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="1" data-name="Chocolate Croissant" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-1.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-2.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Apple Lattice</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="2" data-name="Apple Lattice" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-2.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-3.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Peach Tart</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$2.50</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="3" data-name="Peach Tart" data-price="2.50" data-quantity="1"
+                                    data-image="./img/pizza-3.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Strawberry Tart</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$2.50</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="4" data-name="Strawberry Tart" data-price="2.50" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Chicken Pie</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="5" data-name="Chicken Pie" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- item 2 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Curry Puff</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="6" data-name="Curry Puff" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Tuna Puff</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="7" data-name="Tuna Puff" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="item row align-items-center">
+                                <div class="col-sm-3 pr-5">
+                                    <img class="product-img" src="./img/pizza-4.png">
+                                </div>
+                                <div class="details col-sm-9">
+                                    <div class="item__header">
+                                         <h3 class="item__title">Vegetable Pie</h3>
+                                         <span class="item__dots"></span>
+                                         <span class="item__price">$1.80</span>
+                                    </div>
+                                    <p class="item__description"></p>
+                                    <button class="btn btn-sm btn-outline-primary my-cart-btn"
+                                    data-id="8" data-name="Vegetable Pie" data-price="1.80" data-quantity="1"
+                                    data-image="./img/pizza-4.png">Add to cart</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- End providence Menu -->
+                    </div>
+                    <!-- End block -->
+                    <script src="./js/mycart.js"></script>
+                    <script src="./js/mycart-custom.js"></script>
+                </section>
+            </div>
+        </div>
 
         <script src="js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
