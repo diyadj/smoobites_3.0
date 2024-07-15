@@ -154,10 +154,14 @@ func main() {
     db := setupDB()
     defer db.Close()
 
+    // Serve static files for CSS, JS, images, etc.
+    fs := http.FileServer(http.Dir("smoobites_3.0/landing"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
+
     // Serve index.html for the root URL
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         if r.URL.Path == "/" {
-            http.ServeFile(w, r, filepath.Join("..", "index.html"))
+            http.ServeFile(w, r, filepath.Join("..", "landing", "html", "index.html"))
         } else {
             filePath := filepath.Join("..", r.URL.Path[1:]) // Remove the leading slash
             if _, err := os.Stat(filePath); os.IsNotExist(err) {
