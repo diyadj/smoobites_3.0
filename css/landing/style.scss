@@ -7,7 +7,7 @@ $textCol: #999;
 // import fonts
 @font-face {
   font-family: "bodoni svtytwo sc itc tt book";
-  src: url(../fonts/bodoni-svtytwo-sc-itc-tt-book.ttf);
+  src: url(/smoobites_3.0/assets/landing_fonts/bodoni-svtytwo-sc-itc-tt-book.ttf);
 
 }
 
@@ -46,7 +46,7 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
-  background-image: url(../images/body-bg.jpg);
+  background-image: url(/smoobites_3.0/assets/landing_images/body-bg.jpg);
   background-size: cover;
 }
 
@@ -131,7 +131,7 @@ a:focus {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url(../images/hero-bg.jpg);
+  background-image: url(/smoobites_3.0/assets/landing_images/hero-bg.jpg);
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -507,7 +507,7 @@ h4{
 // app section
 
 .app_section {
-  background-image: url(../images/app-bg.png);
+  background-image: url(/smoobites_3.0/assets/landing_images/app-bg.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -679,7 +679,7 @@ h4{
 // end client section
 
 .footer_container {
-  background-image: url(../images/footer-bg.png);
+  background-image: url(/smoobites_3.0/assets/landing_images/footer-bg.png);
   background-size: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
