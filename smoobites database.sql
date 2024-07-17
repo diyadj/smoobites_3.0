@@ -12,6 +12,12 @@ CREATE TABLE users (
 insert into users (name, email, password, role)
 values ("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor");
 
+-- create table for password resets
+CREATE TABLE password_resets (
+    email VARCHAR(100) UNIQUE NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL
+);
 
 CREATE TABLE food_items (
     id INT AUTO_INCREMENT PRIMARY KEY,

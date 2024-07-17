@@ -220,21 +220,6 @@ input {
 	transform: translateX(20%);
 }
 
-.social-container {
-	margin: 20px 0;
-}
-
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
-}
-
 footer {
     background-color: #222;
     color: #fff;
@@ -269,12 +254,6 @@ footer a {
         <div class="form-container sign-up-container">
             <form action="/auth" method="POST">
                 <h1>Create Account</h1>
-                <!-- <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span> -->
 				<input type="hidden" name="action" value="register"/>
                 <input type="text" id="name" name="name" placeholder="Name" />
                 <input type="email" id="email" name="email"	placeholder="Email" />
@@ -285,16 +264,10 @@ footer a {
         <div class="form-container sign-in-container">
             <form action="/auth" method="POST">
                 <h1>Sign in</h1>
-                <!-- <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span> -->
 				<input type="hidden" name="action" value="login"/>
                 <input type="email" id="email" name="email" placeholder="Email" />
                 <input type="password" id="password" name="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
+                <a href="forgetpassword.html">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
         </div>

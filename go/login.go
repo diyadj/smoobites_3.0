@@ -179,6 +179,8 @@ func main() {
     http.HandleFunc("/get-food-item", getFoodItemByIDHandler(db))
     http.HandleFunc("/set-food-session", setFoodSessionHandler())
     http.HandleFunc("/delete-food-item", deleteFoodItemHandler(db))
+    http.HandleFunc("/forgot-password", forgotPasswordHandler(db))
+	http.HandleFunc("/reset-password", resetPasswordHandler(db))
 
 
     log.Println("Server started on http://localhost:5500")
