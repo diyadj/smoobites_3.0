@@ -112,8 +112,10 @@ func authHandler(db *sql.DB) http.HandlerFunc {
 
             if role == "vendor" {
                 http.Redirect(w, r, "/vmainpage.html", http.StatusSeeOther)
-            } else {
-                http.Redirect(w, r, "/index.html", http.StatusSeeOther)
+            } else if role == "admin" {
+                http.Redirect(w, r, "/adminpage.html", http.StatusSeeOther)
+            }else {
+                http.Redirect(w, r, "/user_landing.html", http.StatusSeeOther)
             }
 
         } else {

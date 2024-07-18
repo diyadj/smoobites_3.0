@@ -79,7 +79,7 @@
           </a>
           <div class="" id="">
             <div class="User_option">
-              <i class="fa fa-user" aria-hidden="true"></i>
+             <a href="user_setting.html"><i class="fa fa-user" aria-hidden="true"></i></a>
               <span id="user-greeting"><a href="login.html" role="button">Login</a></span>
               <div class="dropdown-content">
                 <a href="#" id="logout-button">Logout</a>
@@ -95,7 +95,7 @@
               <div class="overlay-content">
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
-                <a href="blog.html">Blog</a>
+                <!-- <a href="blog.html">Blog</a> -->
                 <a href="review.html">Reviews</a>
               </div>
             </div>
@@ -520,37 +520,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      fetch('/session-info')
-        .then(response => response.json())
-        .then(data => {
-          const userGreeting = document.getElementById('user-greeting');
-          const logoutButton = document.getElementById('logout-button');
-
-          if (data.user) {
-            userGreeting.innerHTML = `${data.user}`;
-            logoutButton.style.display = 'block';
-          } else {
-            userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
-            logoutButton.style.display = 'none';
-          }
-        });
-
-      document.getElementById('logout-button').addEventListener('click', function () {
-        fetch('/logout')
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 'logged out') {
-              const userGreeting = document.getElementById('user-greeting');
-              const logoutButton = document.getElementById('logout-button');
-              userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
-              logoutButton.style.display = 'none';
-            }
-          });
-      });
-    });
-  </script>
+  <script src="./js/personalised.js"></script>
 
 
 </body>

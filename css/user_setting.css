@@ -175,3 +175,19 @@ a.list-group-item, .list-group-item-action {
     background-color: transparent;
     content: '';
 }
+.download_btn {
+  display: inline-block;
+  padding: 12px 45px;
+  background-color: #699677;
+  color: #000000;
+  border-radius: 45px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: 1px solid #699677;
+  outline: none;
+}
+
+.download_btn:hover {
+  background-color: #F27059;
+  color: #f4f4f4;
+}
