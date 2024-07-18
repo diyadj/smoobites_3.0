@@ -1,4 +1,4 @@
-package main
+// package main
 
 // import (
 //     "fmt"
@@ -11,7 +11,7 @@ package main
 // }
 
 // func main() {
-//     password := "khoon"
+//     password := "providence"
 //     hashedPassword, err := hashPassword(password)
 //     if err != nil {
 //         fmt.Println("Error hashing password:", err)
