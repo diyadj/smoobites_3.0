@@ -11,9 +11,15 @@ CREATE TABLE users (
     school VARCHAR(50)
 );
 insert into users (name, email, password, role,school)
-values ("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor","SOE"),
+values ("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor", "SOE"),
 ("Subway", "subway@smu.com", "$2a$10$IY/OUgDJQiLqlCb55RrSSeweHRpcyz7ki3PGiVD9uF2KWVnebqOBe", "vendor","SCIS1"),
 ("Providence", "providence@smu.com","$2a$10$YNuyAXclFzsAzcjaH4x7PenSANguNd9sFoD2DEJwUu3Leuvhpgm4K","vendor","SCIS1");
+-- create table for password resets
+CREATE TABLE password_resets (
+    email VARCHAR(100) UNIQUE NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL
+);
 
 CREATE TABLE food_items (
     id INT AUTO_INCREMENT PRIMARY KEY,

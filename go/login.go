@@ -52,23 +52,14 @@ func authHandler(db *sql.DB) http.HandlerFunc {
         email := r.FormValue("email")
         password := r.FormValue("password")
 
-        if email == "" || password == "" {
-            http.Redirect(w, r, "/login.html?error=empty", http.StatusSeeOther)
-            return
-        }
-
         if action == "register" {
             // Register user
             name := r.FormValue("name")
-            if name == "" {
-                http.Error(w, "Name is required for registration", http.StatusBadRequest)
-                return
-            }
 
             hashedPassword, err := hashPassword(password)
             if err != nil {
                 log.Printf("Failed to hash password: %v", err)
-                http.Error(w, "Error processing the request", http.StatusInternalServerError)
+                http.Error(w, "Unable to hash password", http.StatusBadRequest)
                 return
             }
 
@@ -77,7 +68,7 @@ func authHandler(db *sql.DB) http.HandlerFunc {
             _, err = db.Exec("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)", name, email, hashedPassword, role)
             if err != nil {
                 log.Printf("Failed to insert user: %v", err)
-                http.Error(w, "Error saving the user", http.StatusInternalServerError)
+                http.Error(w, "Unable to insert user", http.StatusBadRequest)
                 return
             }
 
@@ -90,16 +81,16 @@ func authHandler(db *sql.DB) http.HandlerFunc {
             err := db.QueryRow("SELECT password, role, name, id FROM users WHERE email = ?", email).Scan(&storedPassword, &role, &name, &vendorId)
             if err != nil {
                 if err == sql.ErrNoRows {
-                    http.Redirect(w, r, "/login.html?error=invalid", http.StatusSeeOther)
+                    http.Error(w, "Unable to find user", http.StatusBadRequest)
                 } else {
                     log.Printf("Failed to query user: %v", err)
-                    http.Error(w, "Error querying user", http.StatusInternalServerError)
+                    http.Error(w, "Unable to find user", http.StatusBadRequest)
                 }
                 return
             }
 
             if !checkPasswordHash(password, storedPassword) {
-                http.Redirect(w, r, "/login.html?error=invalid", http.StatusSeeOther)
+                http.Error(w, "Unable to find user", http.StatusBadRequest)
                 return
             }
 
@@ -112,8 +103,10 @@ func authHandler(db *sql.DB) http.HandlerFunc {
 
             if role == "vendor" {
                 http.Redirect(w, r, "/vmainpage.html", http.StatusSeeOther)
-            } else {
-                http.Redirect(w, r, "/index.html", http.StatusSeeOther)
+            } else if role == "admin" {
+                http.Redirect(w, r, "/adminpage.html", http.StatusSeeOther)
+            }else {
+                http.Redirect(w, r, "/user_landing.html", http.StatusSeeOther)
             }
 
         } else {
@@ -179,6 +172,8 @@ func main() {
     http.HandleFunc("/get-food-item", getFoodItemByIDHandler(db))
     http.HandleFunc("/set-food-session", setFoodSessionHandler())
     http.HandleFunc("/delete-food-item", deleteFoodItemHandler(db))
+    http.HandleFunc("/forgot-password", forgotPasswordHandler(db))
+	http.HandleFunc("/reset-password", resetPasswordHandler(db))
 
 
     log.Println("Server started on http://localhost:5500")
