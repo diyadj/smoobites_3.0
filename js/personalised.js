@@ -8,9 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.user) {
           userGreeting.innerHTML = `${data.user}`;
           logoutButton.style.display = 'block';
+          document.getElementById('SOELink').setAttribute('href', 'schools.html');
+          document.getElementById('SCISLink').setAttribute('href', 'schools.html');
+          document.getElementById('connexLink').setAttribute('href', 'schools.html');
+          document.getElementById('orderNowLink').setAttribute('href', 'schools.html');
         } else {
           userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
           logoutButton.style.display = 'none';
+          document.getElementById('SOELink').setAttribute('href', '/login.html');
+          document.getElementById('SCISLink').setAttribute('href', '/login.html');
+          document.getElementById('connexLink').setAttribute('href', '/login.html');
+          document.getElementById('orderNowLink').setAttribute('href', '/login.html');
         }
       });
 
