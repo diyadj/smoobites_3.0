@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           userGreeting.innerHTML = '<a href="login.html" role="button">Login</a>';
           logoutButton.style.display = 'none';
-          document.getElementById('SOELink').setAttribute('href', '/login.html');
-          document.getElementById('SCISLink').setAttribute('href', '/login.html');
-          document.getElementById('connexLink').setAttribute('href', '/login.html');
-          document.getElementById('orderNowLink').setAttribute('href', '/login.html');
+          document.getElementById('SOELink').setAttribute('href', 'login.html');
+          document.getElementById('SCISLink').setAttribute('href', 'login.html');
+          document.getElementById('connexLink').setAttribute('href', 'login.html');
+          document.getElementById('orderNowLink').setAttribute('href', 'login.html');
         }
       });
 
