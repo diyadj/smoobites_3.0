@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Smoobites</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+    .User_option {
+      position: relative;
+      display: inline-block;
+    }
+
+    .User_option .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .User_option:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      padding: 0.5em 1em;
+      margin-left: 0;
+      display: inline-block;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      color: #fff !important;
+      border: 1px solid transparent;
+      background: #0d6efd;
+    }
+
+    table.dataTable tbody tr {
+      background-color: white;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      font-size: 16px;
+    }
+
+    .button--is-active {
+      border-bottom: 2px solid #000;
+    }
+
+    .item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .item__dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted #000;
+      margin: 0 10px;
+    }
+
+    .item__title {
+      margin-right: 10px;
+    }
+
+    .item__price {
+      white-space: nowrap;
+    }
+
+    .about_section {
+      padding-bottom: 20px;
+    }
+
+    .menu1 {
+      margin-bottom: 40px;
+    }
+
+    .item {
+      margin-bottom: 20px;
+    }
+
+    .my-cart-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .my-cart-badge {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px 10px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+
+    .header_section .user_cart {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span>Smoobites</span>
+          </a>
+          <div class="user_cart" id="">
+            <div class="User_option">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span id="user-greeting"><a href="login.html" role="button">Login</a></span>
+              <div class="dropdown-content">
+                <a href="#" id="logout-button">Logout</a>
+              </div>
+            </div>
+          </div>
+          <div class="custom_menu-btn">
+            <button onclick="openNav()">
+              <img src="images/menu.png" alt="">
+            </button>
+          </div>
+          <div id="myNav" class="overlay">
+            <div class="overlay-content">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="blog.html">Blog</a>
+              <a href="testimonial.html">Testimonial</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>SCIS1</h2>
+      </div>
+      <section id="menu">
+        <div class="block menu1">
+          <div class="buttons-container">
+            <a href="#" class="button button--is-active" data-target="subway">Subway</a>
+            <a href="#" class="button" data-target="providence">Providence</a>
+          </div>
+          <div class="menu menu--is-visible" id="subway" data-aos="fade-up">
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./subimg/italian.png" alt="Italian B.M.T">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Italian B.M.T</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$10.20</span>
+                </div>
+                <p class="item__description">An old-world favorite. Sliced beef salami,
+                  beef pepperoni and chicken ham and your choice of fresh vegetables and
+                  condiments served on freshly baked bread. Some say B.M.T. stands for biggest,
+                  meatiest, tastiest. We wouldn't disagree.</p>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="1" data-name="Italian B.M.T" data-price="10.20" data-quantity="1" data-image="./subimg/italian.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./subimg/bulgogi.png" alt="Bulgogi Chicken">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Bulgogi Chicken</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$8.40</span>
+                </div>
+                <p class="item__description">Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.</p>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="2" data-name="Bulgogi Chicken" data-price="8.40" data-quantity="1" data-image="./subimg/bulgogi.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./subimg/egg.png" alt="Egg Mayo">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Egg Mayo</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$6.90</span>
+                </div>
+                <p class="item__description">Our delicious concoction of hard boiled eggs and Mayonnaise.
+                  It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.</p>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="3" data-name="Egg Mayo" data-price="6.90" data-quantity="1" data-image="./subimg/egg.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./subimg/veggie.png" alt="Veggie Patty">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Veggie Patty</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$9.10</span>
+                </div>
+                <p class="item__description">If you're a vegetarian or even a carnivore with a taste for green, you have to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own unique spices. It's one of our favorites.</p>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="4" data-name="Veggie Patty" data-price="9.10" data-quantity="1" data-image="./subimg/veggie.png">Add to cart</button>
+              </div>
+            </div>
+          </div>
+          <div class="menu" id="providence" data-aos="fade-up" style="display:none;">
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./img/pizza-1.png" alt="Chocolate Croissant">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Chocolate Croissant</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$1.80</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="5" data-name="Chocolate Croissant" data-price="1.80" data-quantity="1" data-image="./img/pizza-1.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./img/pizza-2.png" alt="Apple Lattice">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Apple Lattice</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$1.80</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="6" data-name="Apple Lattice" data-price="1.80" data-quantity="1" data-image="./img/pizza-2.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./img/pizza-3.png" alt="Peach Tart">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Peach Tart</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$2.50</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="7" data-name="Peach Tart" data-price="2.50" data-quantity="1" data-image="./img/pizza-3.png">Add to cart</button>
+              </div>
+            </div>
+            <div class="item row align-items-center">
+              <div class="col-sm-3 pr-5">
+                <img class="product-img" src="./img/pizza-4.png" alt="Strawberry Tart">
+              </div>
+              <div class="details col-sm-9">
+                <div class="item__header">
+                  <h3 class="item__title">Strawberry Tart</h3>
+                  <span class="item__dots"></span>
+                  <span class="item__price">$2.50</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="8" data-name="Strawberry Tart" data-price="2.50" data-quantity="1" data-image="./img/pizza-4.png">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <div class="modal fade" id="my-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="myModalLabel"> &nbsp; My Cart</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover table-responsive" id="my-cart-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <div class="total-price">
+            <strong>Total: $<span id="total-price">0.00</span></strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="checkout-my-cart">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer_container">
+    <section class="info_section ">
+      <div class="container">
+        <div class="contact_box">
+          <a href="">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="info_links">
+          <ul>
+            <li class="active">
+              <a href="index.html">Home</a>
+            </li>
+            <li>
+              <a href="about.html">About</a>
+            </li>
+            <li>
+              <a class="" href="blog.html">Blog</a>
+            </li>
+            <li>
+              <a class="" href="review.html">Review</a>
+            </li>
+          </ul>
+        </div>
+        <div class="social_box">
+          <a href="">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer_section">
+      <div class="container">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          SMU Smoobites Heaps <br>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <button type="button" class="btn btn-secondary my-cart-icon" data-toggle="modal" data-target="#my-cart-modal">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
+    </svg>
+    <span class="my-cart-badge">0</span>
+  </button>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.js"></script>
+  <!-- Slick slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+  <!-- Nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- DataTables JS -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <!-- Custom JS -->
+  <script src="js/custom.js"></script>
+  <!-- MyCart JS -->
+<!-- MyCart JS -->
+
+<script>
+  $(document).ready(function () {
+    let cart = [];
+
+    function addToCart(item) {
+      const existingItem = cart.find(i => i.id === item.id);
+      if (existingItem) {
+        existingItem.quantity += item.quantity;
+      } else {
+        cart.push(item);
+      }
+      updateCartIcon();
+      updateCartTable();
+    }
+
+    function updateCartIcon() {
+      const cartIcon = document.querySelector('.my-cart-icon');
+      const badge = cartIcon.querySelector('.my-cart-badge');
+      const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+      badge.textContent = itemCount;
+    }
+
+    function updateCartTable() {
+      const cartTableBody = document.getElementById('my-cart-table').getElementsByTagName('tbody')[0];
+      cartTableBody.innerHTML = ''; // Clear existing rows
+
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+        const row = cartTableBody.insertRow();
+        const nameCell = row.insertCell(0);
+        const priceCell = row.insertCell(1);
+        const quantityCell = row.insertCell(2);
+        const totalCell = row.insertCell(3);
+
+        nameCell.textContent = item.name;
+        priceCell.textContent = `$${item.price.toFixed(2)}`;
+        quantityCell.innerHTML = `
+          <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, -1)">-</button>
+          <span>${item.quantity}</span>
+          <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, 1)">+</button>
+        `;
+        const itemTotal = item.price * item.quantity;
+        totalCell.textContent = `$${itemTotal.toFixed(2)}`;
+
+        totalPrice += itemTotal;
+      });
+
+      document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+    }
+
+    window.updateQuantity = function(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
+        updateCartIcon();
+        updateCartTable();
+      }
+    };
+
+    window.removeFromCart = function(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartIcon();
+      updateCartTable();
+    };
+
+    $('.my-cart-btn').click(function () {
+      const id = $(this).data('id');
+      const name = $(this).data('name');
+      const price = parseFloat($(this).data('price'));
+      const quantity = 1; // Always add one item at a time
+      const image = $(this).data('image');
+
+      const item = { id, name, price, quantity, image };
+      addToCart(item);
+    });
+
+    $('.button').click(function () {
+      var target = $(this).data('target');
+      $('.menu').hide();
+      $('#' + target).show();
+      $('.button').removeClass('button--is-active');
+      $(this).addClass('button--is-active');
+    });
+
+    $('#example').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      ajax: {
+        url: '/get-food-items',
+        dataSrc: ''
+      },
+      columns: [
+        { data: 'id' },
+        { data: 'food_name' },
+        {
+          data: 'image_path',
+          render: function (data, type, row) {
+            var imagePath = data.replace(/\\/g, '/');
+            return `<img src="go/${imagePath}" alt="${row.food_name}" style="width: 50px; height: auto;" />`;
+          }
+        },
+        { data: 'description' },
+        { data: 'price' },
+        { data: 'prep_time' },
+        { data: 'vendor_id' },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+              <button type="button" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"></path>
+                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"></path>
+                </svg>
+              </button>`;
+          }
+        },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+              <button type="button" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
+                </svg>
+              </button>`;
+          }
+        },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `
+              <button type="button" class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+              </svg>
+              </button>`;
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+</body>
+
+</html>
