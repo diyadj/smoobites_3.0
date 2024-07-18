@@ -7,10 +7,11 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL
+    role VARCHAR(50) NOT NULL,
+    school VARCHAR(50) 
 );
-insert into users (name, email, password, role)
-values ("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor");
+insert into users (name, email, password, role, school)
+values ("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor", "SOE");
 
 -- create table for password resets
 CREATE TABLE password_resets (
