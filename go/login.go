@@ -7,10 +7,13 @@ import (
     "net/http"
     "os"
     "path/filepath"
-
+	"encoding/json"
+    "github.com/joho/godotenv"
     "github.com/gorilla/sessions"
     _ "github.com/go-sql-driver/mysql"
     "golang.org/x/crypto/bcrypt"
+    "github.com/stripe/stripe-go/v74"
+	"github.com/stripe/stripe-go/v74/checkout/session"
 )
 
 var store = sessions.NewCookieStore([]byte("something-very-secret"))
@@ -150,9 +153,66 @@ func logoutHandler() http.HandlerFunc {
 }
 
 
+
+func createCheckoutSession(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var cart struct {
+		Items []struct {
+			Name     string  `json:"name"`
+			Quantity int64   `json:"quantity"`
+			Price    float64 `json:"price"`
+		} `json:"cart"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&cart); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	var lineItems []*stripe.CheckoutSessionLineItemParams
+	for _, item := range cart.Items {
+		lineItems = append(lineItems, &stripe.CheckoutSessionLineItemParams{
+			PriceData: &stripe.CheckoutSessionLineItemPriceDataParams{
+				Currency: stripe.String(string(stripe.CurrencyUSD)),
+				ProductData: &stripe.CheckoutSessionLineItemPriceDataProductDataParams{
+					Name: stripe.String(item.Name),
+				},
+				UnitAmount: stripe.Int64(int64(item.Price * 100)),
+			},
+			Quantity: stripe.Int64(item.Quantity),
+		})
+	}
+
+	params := &stripe.CheckoutSessionParams{
+		PaymentMethodTypes: stripe.StringSlice([]string{"card"}),
+		LineItems:          lineItems,
+		Mode:               stripe.String(string(stripe.CheckoutSessionModePayment)),
+		SuccessURL:         stripe.String("https://your-domain.com/success"),
+		CancelURL:          stripe.String("https://your-domain.com/cancel"),
+	}
+
+	s, err := session.New(params)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		fmt.Printf("Session creation failed: %v\n", err)
+		return
+	}
+
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"id": s.ID,
+	})
+}
 func main() {
     db := setupDB()
     defer db.Close()
+    err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	// Set  Stripe secret key from the environment variable
+	stripe.Key = os.Getenv("STRIPE_SECRET_KEY")
 
     // Serve index.html for the root URL
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -179,6 +239,7 @@ func main() {
     http.HandleFunc("/get-food-item", getFoodItemByIDHandler(db))
     http.HandleFunc("/set-food-session", setFoodSessionHandler())
     http.HandleFunc("/delete-food-item", deleteFoodItemHandler(db))
+    http.HandleFunc("/create-checkout-session", createCheckoutSession)
 
 
     log.Println("Server started on http://localhost:5500")
