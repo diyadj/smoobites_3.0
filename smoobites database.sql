@@ -41,3 +41,19 @@ CREATE TABLE addons (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (food_id) REFERENCES food_items(id) ON DELETE CASCADE
 );
+
+--Create Order table
+CREATE TABLE order(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    vendor_id INT NOT NULL,
+    food_id INT NOT NULL,
+    addons_id INT,
+    total_price DECIMAL(10,2) NOT NULL,
+    pickup_time TIMESTAMP DEFAULT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (vendor_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (food_id) REFERENCES food_items(id) ON DELETE CASCADE
+    FOREIGN KEY (addons_id) REFERENCES addons(id) ON DELETE CASCADE
+
+)
