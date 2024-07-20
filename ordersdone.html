@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Delfood</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- nice select -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+        integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+    <!-- slick slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+        integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css.map"
+        integrity="undefined" crossorigin="anonymous" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <!-- ezPlus CSS -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.ez-plus.min.css"
+        integrity="sha256-UK1EiopXIL+KVhfbFa8xrmAWPeBjMVdvYMYkTAEv/HI=" crossorigin="anonymous" />
+
+    <!-- Custom CSS for Image Dimensions -->
+    <style>
+        .preview-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            /* Ensures the image covers the area, preserving aspect ratio */
+        }
+
+        .scrollable-container {
+            max-height: 150px;
+            /* Adjust height as needed */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            /* Optional: for visual clarity */
+            padding: 10px;
+            /* Optional: for better spacing */
+        }
+
+        .addon-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .addon-row .form-control {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .addon-row .btn-danger {
+            flex: 0;
+        }
+
+        .invalid-feedback {
+            display: none;
+            /* Ensure the feedback is displayed */
+            color: red;
+            /* Red text for the invalid feedback */
+        }
+
+        .form-control.is-invalid+.invalid-feedback {
+            display: block;
+        }
+
+        .form-control.is-invalid {
+            border-color: red;
+            /* Red border for invalid inputs */
+        }
+
+        .food-addons-label {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .food-addons {
+            margin-top: 10px;
+        }
+
+        .addon-price {
+            font-size: 0.9em;
+            color: grey;
+        }
+
+        .scrollable-addons-container {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .User_option {
+            position: relative;
+            display: inline-block;
+        }
+
+        .User_option .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .User_option:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+
+        .waiting-time-status {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .waiting-time-status span {
+            margin: 0 10px;
+        }
+    </style>
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <!-- header section starts -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>
+                            Smoobites
+                        </span>
+                    </a>
+                    <div class="" id="">
+                        <div class="User_option">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span id="user-greeting"><a href="login.html" role="button">Login</a></span>
+                            <div class="dropdown-content">
+                                <a href="#" id="logout-button">Logout</a>
+                            </div>
+                        </div>
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <img src="images/menu.png" alt="">
+                            </button>
+                            <div id="myNav" class="overlay">
+                                <div class="overlay-content">
+                                    <a href="index.html">Home</a>
+                                    <a href="about.html">About</a>
+                                    <a href="blog.html">Blog</a>
+                                    <a href="testimonial.html">Testimonial</a>
+                                </div>
+                            </div>
+                        </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+    </div>
+
+    <!-- add section -->
+
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center" style="padding-bottom:30px;">
+                <h2>All orders</h2>
+            </div>
+            <div class="p-2 mb-5 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold text-center">Upcoming order</h1>
+                    <div class="text-center">
+                        <p style="text-align: center; color:green;"><i>The restaurant is currently preparing your order! We will notify you when it's done!</i></p>
+                        <div class="waiting-time-status">
+                            <label for="waiting-time">Estimated waiting time: <span id="waiting-time" style="color: limegreen;">20 minutes</span></label>
+                            <span>|</span>
+                            <label for="status">Status: <span id="status" style="color: limegreen;">Done</span></label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 mb-5 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold text-center">Past Orders</h1>
+                    <table id="example" class="table table-striped" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>Order Date</th>
+                            <th>Vendor Name</th>
+                            <th>Food Name</th>
+                            <th>Total price</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- Add more rows as needed -->
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end about section -->
+
+    <div class="footer_container">
+        <!-- info section -->
+        <section class="info_section ">
+            <div class="container">
+                <div class="contact_box">
+                    <a href="">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="info_links">
+                    <ul>
+                        <li class="active">
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="blog.html">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="review.html">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="social_box">
+                    <a href="">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- end info_section -->
+
+        <!-- footer section -->
+        <footer class="footer_section">
+            <div class="container">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By
+                    SMU Smoobites Heaps <br>
+                </p>
+            </div>
+        </footer>
+        <!-- footer section -->
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
+        crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.js"></script>
+    <!-- slick slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
+        integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <!-- ezPlus JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.ez-plus.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

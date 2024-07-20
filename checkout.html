@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <style>
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item img {
+      width: 50px;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+    <div id="cart-items"></div>
+    <div id="total-price"></div>
+    <div id="cart-json"></div>
+    <button id="checkout-button">Checkout</button>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    function getQueryParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const regex = /([^&=]+)=([^&]*)/g;
+      let m;
+      while (m = regex.exec(queryString)) {
+        params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      }
+      return params;
+    }
+
+    function displayCartItems(cart) {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const totalPriceContainer = document.getElementById('total-price');
+      const cartJsonContainer = document.getElementById('cart-json');
+      let totalPrice = 0;
+
+      // Render cart items
+      cart.forEach(item => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.className = 'cart-item';
+        cartItemElement.innerHTML = `
+          <div>${item.name}</div>
+          <div>${item.quantity} x $${item.price}</div>
+        `;
+        cartItemsContainer.appendChild(cartItemElement);
+        totalPrice += item.quantity * item.price;
+      });
+
+      totalPriceContainer.innerHTML = `<h3>Total: $${totalPrice.toFixed(2)}</h3>`;
+      cartJsonContainer.innerHTML = `<pre>${JSON.stringify(cart, null, 2)}</pre>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = getQueryParams();
+      if (params['cart-data']) {
+        const cart = JSON.parse(params['cart-data']);
+        displayCartItems(cart);
+      }
+
+      const stripe = Stripe('pk_test_51PdnzmFIIAHpTRTtNvYQa4ux3WxpcmS4lo7QRRhgsh1jHRz7pNxlRFCBOcjz6kN8Kq0O5nlhLjv3bYN8eXi6Fw8h007izN8ywE');
+      const checkoutButton = document.getElementById('checkout-button');
+
+      checkoutButton.addEventListener('click', () => {
+        fetch('/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            cart: params['cart-data']
+          })
+        })
+        .then(response => response.json())
+        .then(session => {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(result => {
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
