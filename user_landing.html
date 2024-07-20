@@ -93,51 +93,51 @@
       </div>
       <div class="row">
         <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r3.png" class="box-img" alt="">
+            <div class="box">
+                <div class="img-box">
+                    <img src="images/r3.png" class="box-img" alt="">
+                </div>
+                <div class="detail-box">
+                    <h4>
+                        SOE/SCIS 2
+                    </h4>
+                    <a href="#" onclick="saveLocation('SOE/SCIS2')" id="SOELink">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
-            <div class="detail-box">
-              <h4>
-                SOE/SCIS 2
-              </h4>
-              <a href="schools.html">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
         </div>
         <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r2.png" class="box-img" alt="">
+            <div class="box">
+                <div class="img-box">
+                    <img src="images/r2.png" class="box-img" alt="">
+                </div>
+                <div class="detail-box">
+                    <h4>
+                        SCIS1
+                    </h4>
+                    <a href="#" onclick="saveLocation('SCIS1')" id="SCISLink">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
-            <div class="detail-box">
-              <h4>
-                SCIS1
-              </h4>
-              <a href="schools.html">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
         </div>
         <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r1.png" class="box-img" alt="">
+            <div class="box">
+                <div class="img-box">
+                    <img src="images/r1.png" class="box-img" alt="">
+                </div>
+                <div class="detail-box">
+                    <h4>
+                        CONNEX
+                    </h4>
+                    <a href="#" onclick="saveLocation('CONNEX')" id="connexLink">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
-            <div class="detail-box">
-              <h4>
-                CONNEX
-              </h4>
-              <a href="schools.html">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
       <div class="btn-box">
         <a href="">
           Loactions Coming Soon
@@ -266,7 +266,13 @@
     <script src="js/custom.js"></script>
     
     <script src="./js/personalised.js"></script>
-
+    <script>
+      function saveLocation(location) {
+          sessionStorage.setItem('selectedSchool', location);
+          console.log('Location saved:', location);  // This should log the location to the browser console
+          window.location.href = 'schools.html';     // Redirects to the next page
+      }
+      </script>
 </body>
 
 </html>

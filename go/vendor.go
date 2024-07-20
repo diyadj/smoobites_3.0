@@ -11,12 +11,15 @@ import (
 	"fmt"
 
     _ "github.com/go-sql-driver/mysql"
+    
 )
 
 type Response struct {
     Success bool   `json:"success"`
     Message string `json:"message"`
 }
+
+
 
 
 func addFoodItemHandler(db *sql.DB) http.HandlerFunc {
@@ -129,6 +132,12 @@ func addFoodItemHandler(db *sql.DB) http.HandlerFunc {
     }
 }
 
+// Addon represents an add-on for a food item
+type Addon struct {
+    ID    int     `json:"id"`
+    Name  string  `json:"name"`
+    Price float64 `json:"price"`
+}
 
 type FoodItem struct {
     ID          int     `json:"id"`
@@ -140,12 +149,32 @@ type FoodItem struct {
     VendorID    int     `json:"vendor_id"`
     Addons      []Addon `json:"addons"` // Updated to []Addon
 }
+type Vendor struct {
+	ID       int        `json:"id"`
+	Name     string     `json:"name"`
+	FoodItems []FoodItem `json:"food_items"`
+}
 
 
 func getFoodItemsHandler(db *sql.DB) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         log.Println("Received request to fetch food items.")
-        vendorID := 1
+        session, err := store.Get(r, "session-name")
+        log.Println("Session Values:")
+        for key, value := range session.Values {
+            log.Printf("%v: %v\n", key, value)
+        }
+        if err != nil {
+            log.Printf("Error retrieving session: %v\n", err)
+            http.Error(w, "Session error", http.StatusInternalServerError)
+            return
+        }
+        vendorID, ok := session.Values["vendorId"].(int)
+        if !ok {
+            log.Println("VendorID not found in session")
+            http.Error(w, "Session error", http.StatusInternalServerError)
+            return
+        }
 
         rows, err := db.Query("SELECT id, food_name, description, price, prep_time, image_path, vendor_id FROM food_items WHERE vendor_id = ?", vendorID)
         if err != nil {
@@ -159,6 +188,7 @@ func getFoodItemsHandler(db *sql.DB) http.HandlerFunc {
         for rows.Next() {
             var item FoodItem
             var priceStr, prepTimeStr string
+            var description *string 
 
             if err := rows.Scan(&item.ID, &item.FoodName, &item.Description, &priceStr, &prepTimeStr, &item.ImagePath, &item.VendorID); err != nil {
                 log.Printf("Error scanning food item: %v\n", err)
@@ -190,6 +220,11 @@ func getFoodItemsHandler(db *sql.DB) http.HandlerFunc {
                 item.PrepTime = 0 // Default value if prep time is empty
             }
 
+            if description != nil {
+                item.Description = *description
+            } else {
+                item.Description = ""  // Default if NULL
+            }
             foodItems = append(foodItems, item)
         }
 
@@ -212,11 +247,8 @@ func getFoodItemsHandler(db *sql.DB) http.HandlerFunc {
     }
 }
 
-// Addon represents an add-on for a food item
-type Addon struct {
-    Name  string  `json:"name"`
-    Price float64 `json:"price"`
-}
+
+
 
 func getFoodDetailsHandler(db *sql.DB) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
@@ -246,7 +278,7 @@ func getFoodDetailsHandler(db *sql.DB) http.HandlerFunc {
                 return
             }
         } else {
-            foodItem.Price = 0.0 // Default value if price is empty
+            foodItem.Price = 0.0 
         }
 
         if prepTimeStr != "" {
@@ -257,7 +289,7 @@ func getFoodDetailsHandler(db *sql.DB) http.HandlerFunc {
                 return
             }
         } else {
-            foodItem.PrepTime = 0 // Default value if prep time is empty
+            foodItem.PrepTime = 0 
         }
 
         // Query the add-ons
@@ -292,7 +324,7 @@ func getFoodDetailsHandler(db *sql.DB) http.HandlerFunc {
             return
         }
 
-        foodItem.Addons = addons // Correct assignment
+        foodItem.Addons = addons 
 
         w.Header().Set("Content-Type", "application/json")
         if err := json.NewEncoder(w).Encode(foodItem); err != nil {
@@ -344,7 +376,7 @@ func getFoodItemByIDHandler(db *sql.DB) http.HandlerFunc {
                 return
             }
         } else {
-            foodItem.Price = 0.0 // Default value if price is empty
+            foodItem.Price = 0.0 
         }
 
         if prepTimeStr != "" {
@@ -355,7 +387,7 @@ func getFoodItemByIDHandler(db *sql.DB) http.HandlerFunc {
                 return
             }
         } else {
-            foodItem.PrepTime = 0 // Default value if prep time is empty
+            foodItem.PrepTime = 0 
         }
 
         // Query the add-ons
@@ -597,4 +629,108 @@ func deleteFoodItemHandler(db *sql.DB) http.HandlerFunc {
         json.NewEncoder(w).Encode(response)
     }
 }
+
+
+
+
+
+func getVendorsBySchoolHandler(db *sql.DB) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        school := r.URL.Query().Get("school")
+        if school == "" {
+            http.Error(w, "School parameter is required", http.StatusBadRequest)
+            return
+        }
+
+        log.Println("Received request for school:", school)
+
+        query := `
+            SELECT u.id, u.name, f.id, f.food_name, f.description, f.price, f.image_path, 
+                   COALESCE(a.id, 0) AS addon_id, 
+                   COALESCE(a.name, '') AS addon_name, 
+                   COALESCE(a.price, 0.0) AS addon_price
+            FROM users u
+            JOIN food_items f ON u.id = f.vendor_id
+            LEFT JOIN addons a ON f.id = a.food_id
+            WHERE u.school = ?`
+
+        log.Println("Executing query:", query, "with school:", school)
+
+        rows, err := db.Query(query, school)
+        if err != nil {
+            http.Error(w, "Failed to query database", http.StatusInternalServerError)
+            log.Println("Failed to query database:", err)
+            return
+        }
+        defer rows.Close()
+
+        vendors := make(map[int]*Vendor)
+        for rows.Next() {
+            var vendorId int
+            var vendorName string
+            var food FoodItem
+            var addon Addon
+
+            err = rows.Scan(&vendorId, &vendorName, &food.ID, &food.FoodName, &food.Description, &food.Price, &food.ImagePath, &addon.ID, &addon.Name, &addon.Price)
+            if err != nil {
+                http.Error(w, "Failed to read database results", http.StatusInternalServerError)
+                log.Println("Failed to read database results:", err)
+                return
+            }
+
+            // Print each row to the terminal
+            // log.Printf("Vendor ID: %d, Vendor Name: %s, Food ID: %d, Food Name: %s, Description: %s, Price: %.2f, Image Path: %s, AddOn ID: %d, AddOn Name: %s, AddOn Price: %.2f\n",
+                // vendorId, vendorName, food.ID, food.FoodName, food.Description, food.Price, food.ImagePath, addon.ID, addon.Name, addon.Price)
+
+            // Group add-ons by food item
+            if addon.ID != 0 {
+                food.Addons = append(food.Addons, addon)
+            }
+
+            if vendor, exists := vendors[vendorId]; exists {
+                // Check if the food item already exists for the vendor
+                foodExists := false
+                for i := range vendor.FoodItems {
+                    if vendor.FoodItems[i].ID == food.ID {
+                        if addon.ID != 0 {
+                            vendor.FoodItems[i].Addons = append(vendor.FoodItems[i].Addons, addon)
+                        }
+                        foodExists = true
+                        break
+                    }
+                }
+                if !foodExists {
+                    vendor.FoodItems = append(vendor.FoodItems, food)
+                }
+            } else {
+                vendors[vendorId] = &Vendor{
+                    ID:        vendorId,
+                    Name:      vendorName,
+                    FoodItems: []FoodItem{food},
+                }
+            }
+        }
+
+        if err := rows.Err(); err != nil {
+            http.Error(w, "Failed to read database results", http.StatusInternalServerError)
+            log.Println("Error iterating over rows:", err)
+            return
+        }
+
+        vendorsList := make([]*Vendor, 0, len(vendors))
+        for _, vendor := range vendors {
+            vendorsList = append(vendorsList, vendor)
+        }
+
+        log.Println("Vendors fetched:", vendorsList)
+
+        w.Header().Set("Content-Type", "application/json")
+        if err := json.NewEncoder(w).Encode(vendorsList); err != nil {
+            http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+            log.Println("Failed to encode response:", err)
+        }
+    }
+}
+
+
 

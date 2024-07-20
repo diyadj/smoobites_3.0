@@ -14,6 +14,7 @@ import (
     "golang.org/x/crypto/bcrypt"
     "github.com/stripe/stripe-go/v74"
 	"github.com/stripe/stripe-go/v74/checkout/session"
+    "io/ioutil"
 )
 
 var store = sessions.NewCookieStore([]byte("something-very-secret"))
@@ -158,7 +159,15 @@ func createCheckoutSession(w http.ResponseWriter, r *http.Request) {
 		} `json:"cart"`
 	}
 
-	if err := json.NewDecoder(r.Body).Decode(&cart); err != nil {
+	// Log request body
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Failed to read request body", http.StatusBadRequest)
+		return
+	}
+	fmt.Println("Request Body:", string(body))
+
+	if err := json.Unmarshal(body, &cart); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -181,10 +190,9 @@ func createCheckoutSession(w http.ResponseWriter, r *http.Request) {
 		PaymentMethodTypes: stripe.StringSlice([]string{"card"}),
 		LineItems:          lineItems,
 		Mode:               stripe.String(string(stripe.CheckoutSessionModePayment)),
-		SuccessURL:         stripe.String("https://your-domain.com/success"),
+		SuccessURL:         stripe.String("http://localhost:5500/ordersdone.html?session_id={CHECKOUT_SESSION_ID}"),
 		CancelURL:          stripe.String("https://your-domain.com/cancel"),
 	}
-
 	s, err := session.New(params)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -195,6 +203,57 @@ func createCheckoutSession(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"id": s.ID,
 	})
+}
+
+
+func retrieveCheckoutSession(w http.ResponseWriter, r *http.Request) {
+	stripe.Key = "sk_test_51PdnzmFIIAHpTRTtsDgbKXu7SgMMoOkyjEwjpzHfmpAM1fjMkLQN8pzpa8rkpSXW9s0TCXFzFHQ6J2pBUIk2SUnB00HCY4M1zn"
+
+	sessionID := r.URL.Query().Get("session_id")
+	if sessionID == "" {
+		http.Error(w, "session_id is required", http.StatusBadRequest)
+		return
+	}
+
+	s, err := session.Get(sessionID, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(s)
+}
+
+func handleWebhook(w http.ResponseWriter, r *http.Request) {
+    const MaxBodyBytes = int64(65536)
+    r.Body = http.MaxBytesReader(w, r.Body, MaxBodyBytes)
+    payload, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        http.Error(w, "Request body read error", http.StatusServiceUnavailable)
+        return
+    }
+
+    event := stripe.Event{}
+    if err := json.Unmarshal(payload, &event); err != nil {
+        http.Error(w, "Unmarshal JSON error", http.StatusBadRequest)
+        return
+    }
+
+    if event.Type == "checkout.session.completed" {
+        session := stripe.CheckoutSession{}
+        err := json.Unmarshal(event.Data.Raw, &session)
+        if err != nil {
+            http.Error(w, "Unmarshal Checkout Session error", http.StatusBadRequest)
+            return
+        }
+
+        // Handle the checkout session completed event
+        log.Printf("Payment succeeded for session: %s", session.ID)
+        // You can update your order status in the database here
+    }
+
+    w.WriteHeader(http.StatusOK)
 }
 func main() {
     db := setupDB()
@@ -221,6 +280,7 @@ func main() {
         }
     })
 
+
     // API endpoints
     http.HandleFunc("/auth", authHandler(db))
     http.HandleFunc("/session-info", sessionInfoHandler())
@@ -235,6 +295,9 @@ func main() {
     http.HandleFunc("/create-checkout-session", createCheckoutSession)
     http.HandleFunc("/forgot-password", forgotPasswordHandler(db))
 	http.HandleFunc("/reset-password", resetPasswordHandler(db))
+	http.HandleFunc("/vendors", getVendorsBySchoolHandler(db))
+	http.HandleFunc("/retrieve-checkout-session", retrieveCheckoutSession)
+    http.HandleFunc("/webhook", handleWebhook)
 
 
     log.Println("Server started on http://localhost:5500")
