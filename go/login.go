@@ -147,62 +147,58 @@ func logoutHandler() http.HandlerFunc {
 }
 
 
-
 func createCheckoutSession(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+    w.Header().Set("Content-Type", "application/json")
 
-	var cart struct {
-		Items []struct {
-			Name     string  `json:"name"`
-			Quantity int64   `json:"quantity"`
-			Price    float64 `json:"price"`
-		} `json:"cart"`
-	}
+    var cart struct {
+        Items []struct {
+            Name     string  `json:"name"`
+            Quantity int64   `json:"quantity"`
+            Price    float64 `json:"price"`
+        } `json:"cart"`
+    }
 
-	// Log request body
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "Failed to read request body", http.StatusBadRequest)
-		return
-	}
-	fmt.Println("Request Body:", string(body))
+    body, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        http.Error(w, "Failed to read request body", http.StatusBadRequest)
+        return
+    }
 
-	if err := json.Unmarshal(body, &cart); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+    if err := json.Unmarshal(body, &cart); err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
 
-	var lineItems []*stripe.CheckoutSessionLineItemParams
-	for _, item := range cart.Items {
-		lineItems = append(lineItems, &stripe.CheckoutSessionLineItemParams{
-			PriceData: &stripe.CheckoutSessionLineItemPriceDataParams{
-				Currency: stripe.String(string(stripe.CurrencyUSD)),
-				ProductData: &stripe.CheckoutSessionLineItemPriceDataProductDataParams{
-					Name: stripe.String(item.Name),
-				},
-				UnitAmount: stripe.Int64(int64(item.Price * 100)),
-			},
-			Quantity: stripe.Int64(item.Quantity),
-		})
-	}
+    var lineItems []*stripe.CheckoutSessionLineItemParams
+    for _, item := range cart.Items {
+        lineItems = append(lineItems, &stripe.CheckoutSessionLineItemParams{
+            PriceData: &stripe.CheckoutSessionLineItemPriceDataParams{
+                Currency: stripe.String(string(stripe.CurrencyUSD)),
+                ProductData: &stripe.CheckoutSessionLineItemPriceDataProductDataParams{
+                    Name: stripe.String(item.Name),
+                },
+                UnitAmount: stripe.Int64(int64(item.Price * 100)),
+            },
+            Quantity: stripe.Int64(item.Quantity),
+        })
+    }
 
-	params := &stripe.CheckoutSessionParams{
-		PaymentMethodTypes: stripe.StringSlice([]string{"card"}),
-		LineItems:          lineItems,
-		Mode:               stripe.String(string(stripe.CheckoutSessionModePayment)),
-		SuccessURL:         stripe.String("http://localhost:5500/ordersdone.html?session_id={CHECKOUT_SESSION_ID}"),
-		CancelURL:          stripe.String("https://your-domain.com/cancel"),
-	}
-	s, err := session.New(params)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		fmt.Printf("Session creation failed: %v\n", err)
-		return
-	}
+    params := &stripe.CheckoutSessionParams{
+        PaymentMethodTypes: stripe.StringSlice([]string{"card"}),
+        LineItems:          lineItems,
+        Mode:               stripe.String(string(stripe.CheckoutSessionModePayment)),
+        SuccessURL:         stripe.String("http://localhost:5500/ordersdone.html?session_id={CHECKOUT_SESSION_ID}"),
+        CancelURL:          stripe.String("https://your-domain.com/cancel"),
+    }
+    s, err := session.New(params)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"id": s.ID,
-	})
+    json.NewEncoder(w).Encode(map[string]interface{}{
+        "id": s.ID,
+    })
 }
 
 
@@ -298,6 +294,7 @@ func main() {
 	http.HandleFunc("/vendors", getVendorsBySchoolHandler(db))
 	http.HandleFunc("/retrieve-checkout-session", retrieveCheckoutSession)
     http.HandleFunc("/webhook", handleWebhook)
+    http.HandleFunc("/create-order", createOrderHandler(db))
 
 
     log.Println("Server started on http://localhost:5500")

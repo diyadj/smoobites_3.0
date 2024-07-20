@@ -327,6 +327,40 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
         crossorigin="anonymous"></script>
     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
+            // Retrieve cart data from local storage
+            const cartData = JSON.parse(localStorage.getItem('cartData'));
+
+            if (sessionId && cartData) {
+                fetch('/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        sessionId: sessionId,
+                        cart: cartData
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Order created successfully:', data);
+                    // Clear local storage after order creation
+                    localStorage.removeItem('cartData');
+                    // Display success message or redirect
+                    document.getElementById('message').textContent = 'Order created successfully!';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('message').textContent = 'Failed to create order.';
+                });
+            } else {
+                document.getElementById('message').textContent = 'Invalid session or cart data.';
+            }
+        });
         $(document).ready(function () {
             $('#example').DataTable({
                 paging: true,

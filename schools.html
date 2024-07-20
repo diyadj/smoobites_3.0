@@ -420,6 +420,7 @@
         button.href = '#';
         button.className = 'button' + (index === 0 ? ' button--is-active' : '');
         button.dataset.target = `vendor-${vendor.id}`;
+        button.dataset.vendorId = vendor.id; // Add vendor ID to the button
         button.textContent = vendor.name;
         buttonsContainer.appendChild(button);
     
@@ -444,7 +445,7 @@
                 <span class="item__price">$${item.price}</span>
               </div>
               <p class="item__description">${item.description}</p>
-              <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="${item.id}" data-name="${item.food_name}" data-price="${item.price}" data-quantity="1" data-image="${imagePath}" data-addons='${JSON.stringify(item.addons)}'>Add to cart</button>
+              <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="${item.id}" data-name="${item.food_name}" data-price="${item.price}" data-quantity="1" data-image="${imagePath}" data-vendor-id="${vendor.id}" data-addons='${JSON.stringify(item.addons)}'>Add to cart</button>
             </div>
           `;
           menuDiv.appendChild(itemDiv);
@@ -458,7 +459,13 @@
     
     function attachEventListeners() {
       document.querySelectorAll('.button').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(event) {
+          if (cart.length > 0 && cart[0].vendorId !== parseInt(this.dataset.vendorId)) {
+            alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+            event.preventDefault();
+            return;
+          }
+          
           document.querySelectorAll('.menu').forEach(menu => menu.style.display = 'none');
           document.getElementById(this.dataset.target).style.display = 'block';
           document.querySelectorAll('.button').forEach(btn => btn.classList.remove('button--is-active'));
@@ -473,7 +480,8 @@
             name: this.dataset.name,
             price: parseFloat(this.dataset.price),
             quantity: 1,
-            image: this.dataset.image
+            image: this.dataset.image,
+            vendorId: parseInt(this.dataset.vendorId)
           };
           const addons = JSON.parse(this.dataset.addons);
           if (addons && addons.length > 0) {
@@ -535,6 +543,11 @@
     let currentItem = {};
     
     function addToCart(item) {
+      if (cart.length > 0 && cart[0].vendorId !== item.vendorId) {
+        alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+        return;
+      }
+
       const existingItem = cart.find(i => i.id === item.id);
       if (existingItem) {
         existingItem.quantity += item.quantity;
@@ -546,6 +559,7 @@
       }
       updateCartIcon();
       updateCartTable();
+      disableOtherVendors(item.vendorId);
     }
     
     function updateCartIcon() {
@@ -606,6 +620,22 @@
       });
     }
     
+    function disableOtherVendors(vendorId) {
+      document.querySelectorAll('.button').forEach(button => {
+        if (parseInt(button.dataset.vendorId) !== vendorId) {
+          button.classList.add('disabled');
+          button.style.pointerEvents = 'none';
+        }
+      });
+    }
+    
+    function enableAllVendors() {
+      document.querySelectorAll('.button').forEach(button => {
+        button.classList.remove('disabled');
+        button.style.pointerEvents = 'auto';
+      });
+    }
+    
     window.updateQuantity = function(id, change) {
       const item = cart.find(i => i.id === id);
       if (item) {
@@ -615,6 +645,9 @@
         }
         updateCartIcon();
         updateCartTable();
+        if (cart.length === 0) {
+          enableAllVendors();
+        }
       }
     };
     
@@ -624,10 +657,17 @@
       console.log('Updated cart:', cart); // Debugging statement
       updateCartIcon();
       updateCartTable();
+      if (cart.length === 0) {
+        enableAllVendors();
+      }
     };
     
     $(document).ready(function () {
       $('.button').click(function () {
+        if (cart.length > 0 && cart[0].vendorId !== parseInt($(this).data('vendorId'))) {
+          alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+          return false;
+        }
         var target = $(this).data('target');
         $('.menu').hide();
         $('#' + target).show();
@@ -637,11 +677,11 @@
     
       const stripe = Stripe('pk_test_51PdnzmFIIAHpTRTtNvYQa4ux3WxpcmS4lo7QRRhgsh1jHRz7pNxlRFCBOcjz6kN8Kq0O5nlhLjv3bYN8eXi6Fw8h007izN8ywE');
     
+
       const checkoutButton = document.getElementById('checkout-my-cart');
 
-checkoutButton.addEventListener('click', function () {
+checkoutButton.addEventListener('click', function() {
   const cartData = JSON.parse(document.getElementById('cart-data').value);
-  console.log('Checkout data:', cartData); // Print checkout data to console
 
   fetch('/create-checkout-session', {
     method: 'POST',
@@ -654,6 +694,8 @@ checkoutButton.addEventListener('click', function () {
   })
   .then(response => response.json())
   .then(session => {
+    // Store cart data in local storage or session storage
+    localStorage.setItem('cartData', JSON.stringify(cartData));
     return stripe.redirectToCheckout({ sessionId: session.id });
   })
   .then(result => {
@@ -665,9 +707,8 @@ checkoutButton.addEventListener('click', function () {
     console.error('Error:', error);
   });
 });
-
     });
-    </script>
+  </script>
     
 
   

@@ -155,7 +155,28 @@ type Vendor struct {
 	FoodItems []FoodItem `json:"food_items"`
 }
 
+type Order struct {
+    UserID    int     `json:"user_id"`
+    VendorID  int     `json:"vendor_id"`
+    TotalPrice float64 `json:"total_price"`
+    Status    string  `json:"status"`
+}
 
+type OrderItem struct {
+    OrderID   int     `json:"order_id"`
+    FoodID    int     `json:"food_id"`
+    Quantity  int     `json:"quantity"`
+    AddonsIDs []int   `json:"addons_ids"`
+    ItemPrice float64 `json:"item_price"`
+}
+
+type CartItem struct {
+    ID      int     `json:"id"`
+    Name    string  `json:"name"`
+    Price   float64 `json:"price"`
+    Quantity int    `json:"quantity"`
+    Addons  []Addon `json:"addons"`
+}
 func getFoodItemsHandler(db *sql.DB) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         log.Println("Received request to fetch food items.")
@@ -734,3 +755,92 @@ func getVendorsBySchoolHandler(db *sql.DB) http.HandlerFunc {
 
 
 
+func createOrderHandler(db *sql.DB) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        var requestData struct {
+            SessionID string    `json:"sessionId"`
+            Cart      []CartItem `json:"cart"`
+        }
+
+        if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
+            http.Error(w, err.Error(), http.StatusBadRequest)
+            return
+        }
+
+        session, err := store.Get(r, "session-name")
+        userId, ok := session.Values["userid"].(int)
+        if !ok {
+            http.Error(w, "User not logged in", http.StatusUnauthorized)
+            return
+        }
+
+        if len(requestData.Cart) == 0 {
+            http.Error(w, "Cart is empty", http.StatusBadRequest)
+            return
+        }
+
+        vendorId := requestData.Cart[0].ID // Assuming vendor_id is in cart data
+        totalPrice := 0.0
+        for _, item := range requestData.Cart {
+            totalPrice += item.Price * float64(item.Quantity)
+        }
+
+        order := Order{
+            UserID:    userId,
+            VendorID:  vendorId,
+            TotalPrice: totalPrice,
+            Status:    "Pending",
+        }
+
+        tx, err := db.Begin()
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        res, err := tx.Exec("INSERT INTO orders (user_id, vendor_id, total_price, status) VALUES (?, ?, ?, ?)",
+            order.UserID, order.VendorID, order.TotalPrice, order.Status)
+        if err != nil {
+            tx.Rollback()
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        orderId, err := res.LastInsertId()
+        if err != nil {
+            tx.Rollback()
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        for _, item := range requestData.Cart {
+            addonsIds := make([]int, len(item.Addons))
+            for i, addon := range item.Addons {
+                addonsIds[i] = addon.ID
+            }
+            addonsIdsJson, err := json.Marshal(addonsIds)
+            if err != nil {
+                tx.Rollback()
+                http.Error(w, err.Error(), http.StatusInternalServerError)
+                return
+            }
+
+            _, err = tx.Exec("INSERT INTO order_items (order_id, food_id, quantity, addons_ids, item_price) VALUES (?, ?, ?, ?, ?)",
+                orderId, item.ID, item.Quantity, addonsIdsJson, item.Price)
+            if err != nil {
+                tx.Rollback()
+                http.Error(w, err.Error(), http.StatusInternalServerError)
+                return
+            }
+        }
+
+        err = tx.Commit()
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+
+        w.WriteHeader(http.StatusCreated)
+        json.NewEncoder(w).Encode(map[string]interface{}{"message": "Order created successfully"})
+    }
+}
