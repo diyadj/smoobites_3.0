@@ -139,10 +139,89 @@
       align-items: center;
     }
   </style>
+  <style>
+    /* Style the modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color:#699677 ; /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #Ffff;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 500px; /* Set width */
+      height: 300px; /* Set height to make it square */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #F27059;
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Centering the text */
+    .modal-content p {
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
+  <!-- Maintenance Modal -->
+  <div id="maintenanceModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>The selected school is under maintenance. Please order from SCIS1.</p>
+    </div>
+  </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
+      const school = params.get("school");
+
+      if (school === "SOE" || school === "CONNEX") {
+        const modal = document.getElementById("maintenanceModal");
+        modal.style.display = "block";
+
+        const span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+    });
+  </script>
   <div class="hero_area">
     <header class="header_section">
       <div class="container-fluid">
