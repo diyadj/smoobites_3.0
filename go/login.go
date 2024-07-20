@@ -72,8 +72,13 @@ func authHandler(db *sql.DB) http.HandlerFunc {
                 return
             }
 
-            w.Header().Set("Content-Type", "text/html; charset=utf-8")
-            fmt.Fprintf(w, "<h1>Registration successful!</h1>")
+            if role == "vendor" {
+                http.Redirect(w, r, "/vmainpage.html", http.StatusSeeOther)
+            } else if role == "admin" {
+                http.Redirect(w, r, "/adminpage.html", http.StatusSeeOther)
+            }else {
+                http.Redirect(w, r, "/user_landing.html", http.StatusSeeOther)
+            }
         } else if action == "login" {
             // Login user
             var storedPassword, role, name string
