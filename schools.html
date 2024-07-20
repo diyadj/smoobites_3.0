@@ -138,6 +138,47 @@
       display: flex;
       align-items: center;
     }
+
+    .menu-container {
+    max-height: 600px; /* Adjust based on your preference */
+    overflow-y: auto;
+  }
+  
+  .menu {
+    max-height: 500px; /* Adjust to fit max 4 items */
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .item {
+    margin-bottom: 20px; /* Space between items */
+  }
+
+  .addon-container {
+    max-height: 150px; /* Adjust the height as needed */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .addon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .addon-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .addon-item input {
+    width: 50px;
+    text-align: center;
+  }
   </style>
   <style>
     /* Style the modal (background) */
@@ -255,149 +296,40 @@
       </div>
     </header>
   </div>
-
   <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2>SCIS1</h2>
+        <h2 id="locationTitle">SCIS1</h2>
       </div>
       <section id="menu">
         <div class="block menu1">
-          <div class="buttons-container">
-            <a href="#" class="button button--is-active" data-target="subway">Subway</a>
-            <a href="#" class="button" data-target="providence">Providence</a>
-          </div>
-          <div class="menu menu--is-visible" id="subway" data-aos="fade-up">
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./subimg/italian.png" alt="Italian B.M.T">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Italian B.M.T</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$10.20</span>
-                </div>
-                <p class="item__description">An old-world favorite. Sliced beef salami,
-                  beef pepperoni and chicken ham and your choice of fresh vegetables and
-                  condiments served on freshly baked bread. Some say B.M.T. stands for biggest,
-                  meatiest, tastiest. We wouldn't disagree.</p>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="1" data-name="Italian B.M.T"
-                  data-price="10.20" data-quantity="1" data-image="./subimg/italian.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./subimg/bulgogi.png" alt="Bulgogi Chicken">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Bulgogi Chicken</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$8.40</span>
-                </div>
-                <p class="item__description">Tender chicken marinated in the classic sweet and savoury Korean bulgogi
-                  sauce.</p>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="2" data-name="Bulgogi Chicken"
-                  data-price="8.40" data-quantity="1" data-image="./subimg/bulgogi.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./subimg/egg.png" alt="Egg Mayo">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Egg Mayo</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$6.90</span>
-                </div>
-                <p class="item__description">Our delicious concoction of hard boiled eggs and Mayonnaise.
-                  It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.</p>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="3" data-name="Egg Mayo"
-                  data-price="6.90" data-quantity="1" data-image="./subimg/egg.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./subimg/veggie.png" alt="Veggie Patty">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Veggie Patty</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$9.10</span>
-                </div>
-                <p class="item__description">If you're a vegetarian or even a carnivore with a taste for green, you have
-                  to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own
-                  unique spices. It's one of our favorites.</p>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="4" data-name="Veggie Patty"
-                  data-price="9.10" data-quantity="1" data-image="./subimg/veggie.png">Add to cart</button>
-              </div>
-            </div>
-          </div>
-          <div class="menu" id="providence" data-aos="fade-up" style="display:none;">
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./img/pizza-1.png" alt="Chocolate Croissant">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Chocolate Croissant</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$1.80</span>
-                </div>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="5" data-name="Chocolate Croissant"
-                  data-price="1.80" data-quantity="1" data-image="./img/pizza-1.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./img/pizza-2.png" alt="Apple Lattice">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Apple Lattice</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$1.80</span>
-                </div>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="6" data-name="Apple Lattice"
-                  data-price="1.80" data-quantity="1" data-image="./img/pizza-2.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./img/pizza-3.png" alt="Peach Tart">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Peach Tart</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$2.50</span>
-                </div>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="7" data-name="Peach Tart"
-                  data-price="2.50" data-quantity="1" data-image="./img/pizza-3.png">Add to cart</button>
-              </div>
-            </div>
-            <div class="item row align-items-center">
-              <div class="col-sm-3 pr-5">
-                <img class="product-img" src="./img/pizza-4.png" alt="Strawberry Tart">
-              </div>
-              <div class="details col-sm-9">
-                <div class="item__header">
-                  <h3 class="item__title">Strawberry Tart</h3>
-                  <span class="item__dots"></span>
-                  <span class="item__price">$2.50</span>
-                </div>
-                <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="8" data-name="Strawberry Tart"
-                  data-price="2.50" data-quantity="1" data-image="./img/pizza-4.png">Add to cart</button>
-              </div>
-            </div>
-          </div>
+          <div class="buttons-container"></div>
+          <div class="menu-container"></div>
         </div>
       </section>
     </div>
   </section>
+  <div class="modal fade" id="addon-modal" tabindex="-1" role="dialog" aria-labelledby="addonModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="addonModalLabel">Select Add-ons</h5>
+        </div>
+        <div class="modal-body">
+          <div id="addon-options"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="add-to-cart-with-addons">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
 
   <div class="modal fade" id="my-cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -416,6 +348,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -520,118 +453,343 @@
 
   <script src="https://js.stripe.com/v3/"></script>
   <script>
-    $(document).ready(function () {
-      let cart = [];
-  
-      function addToCart(item) {
-        const existingItem = cart.find(i => i.id === item.id);
-        if (existingItem) {
-          existingItem.quantity += item.quantity;
-        } else {
-          cart.push(item);
+    document.addEventListener('DOMContentLoaded', function() {
+      const school = sessionStorage.getItem('selectedSchool') || 'SCIS1';
+      console.log(`Retrieved school from sessionStorage: ${school}`);
+    
+      if (school) {
+        const locationTitleElement = document.getElementById('locationTitle');
+        if (locationTitleElement) {
+          locationTitleElement.textContent = school;
+        }
+        fetchVendors(school);
+      } else {
+        console.log('No school found');
+      }
+    });
+    
+    function fetchVendors(school) {
+      fetch(`/vendors?school=${encodeURIComponent(school)}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Fetched vendors data:', JSON.stringify(data, null, 2)); // Log the fetched data
+          updateUI(data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+    
+    function replaceBackslashes(path) {
+      return path.replace(/\\/g, '/');
+    }
+    
+    function updateUI(vendors) {
+      const buttonsContainer = document.querySelector('.buttons-container');
+      const menuContainer = document.querySelector('.menu-container');
+      buttonsContainer.innerHTML = '';
+      menuContainer.innerHTML = '';
+    
+      vendors.forEach((vendor, index) => {
+        // Create vendor button
+        const button = document.createElement('a');
+        button.href = '#';
+        button.className = 'button' + (index === 0 ? ' button--is-active' : '');
+        button.dataset.target = `vendor-${vendor.id}`;
+        button.dataset.vendorId = vendor.id; // Add vendor ID to the button
+        button.textContent = vendor.name;
+        buttonsContainer.appendChild(button);
+    
+        // Create vendor menu
+        const menuDiv = document.createElement('div');
+        menuDiv.className = 'menu' + (index === 0 ? ' menu--is-visible' : '');
+        menuDiv.id = `vendor-${vendor.id}`;
+        menuDiv.style.display = index === 0 ? 'block' : 'none';
+    
+        vendor.food_items.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'item row align-items-center';
+          const imagePath = replaceBackslashes(item.image_path);
+          itemDiv.innerHTML = `
+            <div class="col-sm-3 pr-5">
+              <img class="product-img" src="go/${imagePath}" alt="${item.food_name}" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
+            </div>
+            <div class="details col-sm-9">
+              <div class="item__header">
+                <h3 class="item__title">${item.food_name}</h3>
+                <span class="item__dots"></span>
+                <span class="item__price">$${item.price}</span>
+              </div>
+              <p class="item__description">${item.description}</p>
+              <button class="btn btn-sm btn-outline-primary my-cart-btn" data-id="${item.id}" data-name="${item.food_name}" data-price="${item.price}" data-quantity="1" data-image="${imagePath}" data-vendor-id="${vendor.id}" data-addons='${JSON.stringify(item.addons)}'>Add to cart</button>
+            </div>
+          `;
+          menuDiv.appendChild(itemDiv);
+        });
+    
+        menuContainer.appendChild(menuDiv);
+      });
+    
+      attachEventListeners();
+    }
+    
+    function attachEventListeners() {
+      document.querySelectorAll('.button').forEach(button => {
+        button.addEventListener('click', function(event) {
+          if (cart.length > 0 && cart[0].vendorId !== parseInt(this.dataset.vendorId)) {
+            alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+            event.preventDefault();
+            return;
+          }
+          
+          document.querySelectorAll('.menu').forEach(menu => menu.style.display = 'none');
+          document.getElementById(this.dataset.target).style.display = 'block';
+          document.querySelectorAll('.button').forEach(btn => btn.classList.remove('button--is-active'));
+          this.classList.add('button--is-active');
+        });
+      });
+    
+      document.querySelectorAll('.my-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          currentItem = {
+            id: this.dataset.id,
+            name: this.dataset.name,
+            price: parseFloat(this.dataset.price),
+            quantity: 1,
+            image: this.dataset.image,
+            vendorId: parseInt(this.dataset.vendorId)
+          };
+          const addons = JSON.parse(this.dataset.addons);
+          if (addons && addons.length > 0) {
+            displayAddonModal(addons);
+          } else {
+            addToCart(currentItem);
+          }
+        });
+      });
+    
+      document.getElementById('add-to-cart-with-addons').addEventListener('click', function() {
+        currentItem.addons = selectedAddons;
+        addToCart(currentItem);
+        $('#addon-modal').modal('hide');
+      });
+    
+      document.querySelectorAll('.remove-from-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.dataset.id;
+          removeFromCart(id);
+        });
+      });
+    }
+    
+    function displayAddonModal(addons) {
+      const addonOptions = document.getElementById('addon-options');
+      addonOptions.innerHTML = '';
+    
+      addons.forEach(addon => {
+        const addonDiv = document.createElement('div');
+        addonDiv.className = 'addon-item';
+        addonDiv.innerHTML = `
+          <label>
+            <input type="checkbox" data-name="${addon.name}" data-price="${addon.price}">
+            ${addon.name} (+$${addon.price.toFixed(2)})
+          </label>
+        `;
+        addonOptions.appendChild(addonDiv);
+      });
+    
+      selectedAddons = [];
+      $('#addon-modal').modal('show');
+    
+      addonOptions.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const name = this.dataset.name;
+          const price = parseFloat(this.dataset.price);
+          if (this.checked) {
+            selectedAddons.push({ name, price });
+          } else {
+            selectedAddons = selectedAddons.filter(addon => addon.name !== name);
+          }
+        });
+      });
+    }
+    
+    let cart = [];
+    let selectedAddons = [];
+    let currentItem = {};
+    
+    function addToCart(item) {
+      if (cart.length > 0 && cart[0].vendorId !== item.vendorId) {
+        alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+        return;
+      }
+
+      const existingItem = cart.find(i => i.id === item.id);
+      if (existingItem) {
+        existingItem.quantity += item.quantity;
+        if (item.addons) {
+          existingItem.addons = [...(existingItem.addons || []), ...item.addons];
+        }
+      } else {
+        cart.push(item);
+      }
+      updateCartIcon();
+      updateCartTable();
+      disableOtherVendors(item.vendorId);
+    }
+    
+    function updateCartIcon() {
+      const cartIcon = document.querySelector('.my-cart-icon');
+      const badge = cartIcon.querySelector('.my-cart-badge');
+      const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+      badge.textContent = itemCount;
+    }
+    
+    function updateCartTable() {
+      const cartTableBody = document.getElementById('my-cart-table').getElementsByTagName('tbody')[0];
+      cartTableBody.innerHTML = ''; // Clear existing rows
+    
+      let totalPrice = 0;
+    
+      cart.forEach(item => {
+        const row = cartTableBody.insertRow();
+        const nameCell = row.insertCell(0);
+        const priceCell = row.insertCell(1);
+        const quantityCell = row.insertCell(2);
+        const totalCell = row.insertCell(3);
+        const removeCell = row.insertCell(4); // Add a cell for the remove button
+    
+        let addonsPrice = 0;
+        let addonsText = '';
+        if (item.addons) {
+          item.addons.forEach(addon => {
+            addonsPrice += addon.price;
+            addonsText += `, ${addon.name} (+$${addon.price.toFixed(2)})`;
+          });
+        }
+    
+        const itemTotal = (item.price + addonsPrice) * item.quantity;
+    
+        nameCell.innerHTML = `${item.name}<small>${addonsText}</small>`;
+        priceCell.textContent = `$${(item.price + addonsPrice).toFixed(2)}`;
+        quantityCell.innerHTML = `
+          <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, -1)">-</button>
+          <span>${item.quantity}</span>
+          <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, 1)">+</button>
+        `;
+        totalCell.textContent = `$${itemTotal.toFixed(2)}`;
+        removeCell.innerHTML = `<button class="btn btn-sm btn-danger remove-from-cart" data-id="${item.id}">Remove</button>`; // Add the remove button
+    
+        totalPrice += itemTotal;
+      });
+    
+      document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+      // Update hidden input value with cart data
+      document.getElementById('cart-data').value = JSON.stringify(cart);
+      
+      // Re-attach event listeners for the remove buttons
+      document.querySelectorAll('.remove-from-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.dataset.id;
+          removeFromCart(id);
+        });
+      });
+    }
+    
+    function disableOtherVendors(vendorId) {
+      document.querySelectorAll('.button').forEach(button => {
+        if (parseInt(button.dataset.vendorId) !== vendorId) {
+          button.classList.add('disabled');
+          button.style.pointerEvents = 'none';
+        }
+      });
+    }
+    
+    function enableAllVendors() {
+      document.querySelectorAll('.button').forEach(button => {
+        button.classList.remove('disabled');
+        button.style.pointerEvents = 'auto';
+      });
+    }
+    
+    window.updateQuantity = function(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.id !== id);
         }
         updateCartIcon();
         updateCartTable();
-      }
-  
-      function updateCartIcon() {
-        const cartIcon = document.querySelector('.my-cart-icon');
-        const badge = cartIcon.querySelector('.my-cart-badge');
-        const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-        badge.textContent = itemCount;
-      }
-  
-      function updateCartTable() {
-        const cartTableBody = document.getElementById('my-cart-table').getElementsByTagName('tbody')[0];
-        cartTableBody.innerHTML = ''; // Clear existing rows
-  
-        let totalPrice = 0;
-  
-        cart.forEach(item => {
-          const row = cartTableBody.insertRow();
-          const nameCell = row.insertCell(0);
-          const priceCell = row.insertCell(1);
-          const quantityCell = row.insertCell(2);
-          const totalCell = row.insertCell(3);
-  
-          nameCell.textContent = item.name;
-          priceCell.textContent = `$${item.price.toFixed(2)}`;
-          quantityCell.innerHTML = `
-            <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, -1)">-</button>
-            <span>${item.quantity}</span>
-            <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${item.id}, 1)">+</button>
-          `;
-          const itemTotal = item.price * item.quantity;
-          totalCell.textContent = `$${itemTotal.toFixed(2)}`;
-  
-          totalPrice += itemTotal;
-        });
-  
-        document.getElementById('total-price').textContent = totalPrice.toFixed(2);
-        // Update hidden input value with cart data
-        document.getElementById('cart-data').value = JSON.stringify(cart);
-      }
-  
-      window.updateQuantity = function (id, change) {
-        const item = cart.find(i => i.id === id);
-        if (item) {
-          item.quantity += change;
-          if (item.quantity <= 0) {
-            cart = cart.filter(i => i.id !== id);
-          }
-          updateCartIcon();
-          updateCartTable();
+        if (cart.length === 0) {
+          enableAllVendors();
         }
-      };
-  
-      $('.my-cart-btn').click(function () {
-        const id = $(this).data('id');
-        const name = $(this).data('name');
-        const price = parseFloat($(this).data('price'));
-        const quantity = 1; // Always add one item at a time
-        const image = $(this).data('image');
-  
-        const item = { id, name, price, quantity, image };
-        addToCart(item);
-      });
-  
+      }
+    };
+    
+    window.removeFromCart = function(id) {
+      console.log('Removing item with id:', id); // Debugging statement
+      cart = cart.filter(item => item.id !== id);
+      console.log('Updated cart:', cart); // Debugging statement
+      updateCartIcon();
+      updateCartTable();
+      if (cart.length === 0) {
+        enableAllVendors();
+      }
+    };
+    
+    $(document).ready(function () {
       $('.button').click(function () {
+        if (cart.length > 0 && cart[0].vendorId !== parseInt($(this).data('vendorId'))) {
+          alert("You have items in your cart from another vendor. Please clear your cart to switch vendors.");
+          return false;
+        }
         var target = $(this).data('target');
         $('.menu').hide();
         $('#' + target).show();
         $('.button').removeClass('button--is-active');
         $(this).addClass('button--is-active');
       });
-  
+    
       const stripe = Stripe('pk_test_51PdnzmFIIAHpTRTtNvYQa4ux3WxpcmS4lo7QRRhgsh1jHRz7pNxlRFCBOcjz6kN8Kq0O5nlhLjv3bYN8eXi6Fw8h007izN8ywE');
+    
+
       const checkoutButton = document.getElementById('checkout-my-cart');
-  
-      checkoutButton.addEventListener('click', function () {
-        const cartData = JSON.parse(document.getElementById('cart-data').value);
-        fetch('/create-checkout-session', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            cart: cartData
-          })
-        })
-        .then(response => response.json())
-        .then(session => {
-          return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .then(result => {
-          if (result.error) {
-            alert(result.error.message);
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      });
+
+checkoutButton.addEventListener('click', function() {
+  const cartData = JSON.parse(document.getElementById('cart-data').value);
+
+  fetch('/create-checkout-session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      cart: cartData
+    })
+  })
+  .then(response => response.json())
+  .then(session => {
+    // Store cart data in local storage or session storage
+    localStorage.setItem('cartData', JSON.stringify(cartData));
+    return stripe.redirectToCheckout({ sessionId: session.id });
+  })
+  .then(result => {
+    if (result.error) {
+      alert(result.error.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
     });
   </script>
+    
+
   
 
 </body>

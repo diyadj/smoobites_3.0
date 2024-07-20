@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Delfood</title>
+    <title>Smoobites</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -144,7 +144,6 @@
             background-color: #ddd;
         }
 
-
         .waiting-time-status {
             font-size: 1.5em;
             font-weight: bold;
@@ -230,11 +229,10 @@
                             <th>Vendor Name</th>
                             <th>Food Name</th>
                             <th>Total price</th>
-                            
                           </tr>
                         </thead>
-                        <tbody>
-                          <!-- Add more rows as needed -->
+                        <tbody id="order-details">
+                          <!-- Order details will be populated here -->
                         </tbody>
                       </table>
                 </div>
@@ -328,6 +326,123 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.ez-plus.min.js"
         integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/yyb5/G5f5zvF6PT/uP4C/BHnPIK4b/c0DQv64m"
         crossorigin="anonymous"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
+            // Retrieve cart data from local storage
+            const cartData = JSON.parse(localStorage.getItem('cartData'));
+
+            if (sessionId && cartData) {
+                fetch('/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        sessionId: sessionId,
+                        cart: cartData
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Order created successfully:', data);
+                    // Clear local storage after order creation
+                    localStorage.removeItem('cartData');
+                    // Display success message or redirect
+                    document.getElementById('message').textContent = 'Order created successfully!';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('message').textContent = 'Failed to create order.';
+                });
+            } else {
+                document.getElementById('message').textContent = 'Invalid session or cart data.';
+            }
+        });
+        $(document).ready(function () {
+            $('#example').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+            });
+
+            // Get the cart data from localStorage (or server)
+            const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+            console.log('Cart Data:', cartData); // Debugging
+
+            // Populate the order details table
+            const orderDetails = document.getElementById('order-details');
+            cartData.forEach(order => {
+                const row = document.createElement('tr');
+
+                const orderDateCell = document.createElement('td');
+                orderDateCell.textContent = new Date().toLocaleDateString(); // Example date
+                row.appendChild(orderDateCell);
+
+                const vendorNameCell = document.createElement('td');
+                vendorNameCell.textContent = "Vendor Name"; // Replace with actual vendor name
+                row.appendChild(vendorNameCell);
+
+                const foodNameCell = document.createElement('td');
+                foodNameCell.textContent = order.name;
+                row.appendChild(foodNameCell);
+
+                const totalPriceCell = document.createElement('td');
+                totalPriceCell.textContent = `$${order.price.toFixed(2)}`;
+                row.appendChild(totalPriceCell);
+
+                orderDetails.appendChild(row);
+            });
+
+            const stripe = Stripe('pk_test_51PdnzmFIIAHpTRTtNvYQa4ux3WxpcmS4lo7QRRhgsh1jHRz7pNxlRFCBOcjz6kN8Kq0O5nlhLjv3bYN8eXi6Fw8h007izN8ywE');
+            const checkoutButton = document.getElementById('checkout-my-cart');
+
+            checkoutButton.addEventListener('click', function () {
+                const cartData = JSON.parse(document.getElementById('cart-data').value);
+                console.log('Checkout data:', cartData); // Print checkout data to console
+
+                fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cart: cartData
+                    })
+                })
+                    .then(response => response.json())
+                    .then(session => {
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    })
+                    .then(result => {
+                        if (result.error) {
+                            alert(result.error.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            if (sessionId) {
+                stripe.retrieveCheckoutSession(sessionId)
+                    .then(function (response) {
+                        if (response.error) {
+                            console.error(response.error.message);
+                        } else {
+                            if (response.payment_intent.status === 'succeeded') {
+                                window.location.href = 'ordersdone.html';
+                            }
+                        }
+                    });
+            }
+        });
+    </script>
 </body>
 
 </html>

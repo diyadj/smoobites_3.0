@@ -12,10 +12,10 @@ CREATE TABLE users (
 );
 insert into users (name, email, password, role,school)
 values 
-("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor", "SOE"),
+("khoon coffeehouse express", "khoon@smu.com", "$2a$10$g6C1dZ2Sa/MCye.pJW55J.OoIcg9bCwa.71jm7ZqT4WAJWuWfhD3S", "vendor", "SOE/SCIS2"),
 ("Subway", "subway@smu.com", "$2a$10$IY/OUgDJQiLqlCb55RrSSeweHRpcyz7ki3PGiVD9uF2KWVnebqOBe", "vendor","SCIS1"),
 ("Providence", "providence@smu.com","$2a$10$YNuyAXclFzsAzcjaH4x7PenSANguNd9sFoD2DEJwUu3Leuvhpgm4K","vendor","SCIS1"),
-("Nasi Lemak Ayam Taliwang","nasilemak@smu.com","$2a$10$6Ju4dYf/aLugQXilRgPEIuljDMGc.ZvwhNiSNSQ5GSLj0Cgu7ZY6a","vendor", "SOE");
+("Nasi Lemak Ayam Taliwang","nasilemak@smu.com","$2a$10$6Ju4dYf/aLugQXilRgPEIuljDMGc.ZvwhNiSNSQ5GSLj0Cgu7ZY6a","vendor", "SOE/SCIS2");
 -- create table for password resets
 CREATE TABLE password_resets (
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -36,21 +36,21 @@ CREATE TABLE food_items (
 );
 insert into food_items (food_name, description,price,prep_time,image_path,vendor_id)
 values
-    ('6 Inch Italian B.M.T',"An old-world favorite. Sliced beef salami, beef pepperoni and chicken ham and your choice of fresh vegetables and condiments served on freshly baked bread. Some say B.M.T. stands for biggest, meatiest, tastiest. We wouldn't disagree.. ", '10.20','2','italian.png',2),
-    ('6 Inch Bulgogi Chicken', "Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.",'8.40', '2', 'bulgogi.png',2),
-    ('6 Inch Egg Mayo', "Our delicious concoction of hard boiled eggs and Mayonnaise. It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.",'6.90', '2', 'egg.png',2),
-    ('6 Inch Veggie Patty',"If you're a vegetarian or even a carnivore with a taste for green, you have to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own unique spices.It's one of our favorites.", '9.10', '2', 'veggie.png',2),
-    ('12 Inch Italian B.M.T',"An old-world favorite. Sliced beef salami, beef pepperoni and chicken ham and your choice of fresh vegetables and condiments served on freshly baked bread. Some say B.M.T. stands for biggest, meatiest, tastiest. We wouldn't disagree.. ", '15.70','3','italian.png',2),
-    ('12 Inch Bulgogi Chicken', "Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.",'13.90', '3', 'bulgogi.png',2),
-    ('12 Inch Egg Mayo', "Our delicious concoction of hard boiled eggs and Mayonnaise. It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.",'12.40', '3', 'egg.png',2),
-    ('12 Inch Veggie Patty',"If you're a vegetarian or even a carnivore with a taste for green, you have to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own unique spices.It's one of our favorites.", '14.60', '3', 'veggie.png',2),
-    ('Italian B.M.T Salad',NULL, '12.40','3',NULL,2),
-    ('Bulgogi Chicken Salad',NULL, '10.60','3',NULL,2),
-    ('Egg Mayo Salad',NULL, '9.10','3',NULL,2),
-    ('Veggie Patty Salad',NULL, '11.30','3',NULL,2),
-    ("Chocolate Croissant", NULL, '1.80','1',NULL,3),("Apple Lattice", NULL, '1.80','1',NULL,3),("Peach Tart", NULL, '2.50','1',NULL,3),
-    ("Strawberry Tart", NULL, '2.50','1',NULL,3),("Chicken Pie", NULL, '1.80','1',NULL,3),("Curry Puff", NULL, '1.80','1',NULL,3),
-    ("Tuna Puff", NULL, '1.80','1',NULL,3),("Vegetable Pie", NULL, '1.80','1',NULL,3);
+    ('6 Inch Italian B.M.T',"An old-world favorite. Sliced beef salami, beef pepperoni and chicken ham and your choice of fresh vegetables and condiments served on freshly baked bread. Some say B.M.T. stands for biggest, meatiest, tastiest. We wouldn't disagree.. ", '10.20','2','uploads\italian.png',2),
+    ('6 Inch Bulgogi Chicken', "Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.",'8.40', '2', 'uploads\bulgogi.png',2),
+    ('6 Inch Egg Mayo', "Our delicious concoction of hard boiled eggs and Mayonnaise. It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.",'6.90', '2', 'uploads\egg.png',2),
+    ('6 Inch Veggie Patty',"If you're a vegetarian or even a carnivore with a taste for green, you have to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own unique spices.It's one of our favorites.", '9.10', '2', 'uploads\veggie.png',2),
+    ('12 Inch Italian B.M.T',"An old-world favorite. Sliced beef salami, beef pepperoni and chicken ham and your choice of fresh vegetables and condiments served on freshly baked bread. Some say B.M.T. stands for biggest, meatiest, tastiest. We wouldn't disagree.. ", '15.70','3','uploads\italian.png',2),
+    ('12 Inch Bulgogi Chicken', "Tender chicken marinated in the classic sweet and savoury Korean bulgogi sauce.",'13.90', '3', 'uploads\bulgogi.png',2),
+    ('12 Inch Egg Mayo', "Our delicious concoction of hard boiled eggs and Mayonnaise. It's a local favorite for many Singaporeans and even satisfies some of our vegetarian customers.",'12.40', '3', 'uploads\egg.png',2),
+    ('12 Inch Veggie Patty',"If you're a vegetarian or even a carnivore with a taste for green, you have to try this tasty vegetarian selection. The patty is made from vegetables and brown rice and its own unique spices.It's one of our favorites.", '14.60', '3', 'uploads\veggie.png',2),
+    ('Italian B.M.T Salad',"Salad", '12.40','3',"uploads\italian.jpg",2),
+    ('Bulgogi Chicken Salad',"Salad", '10.60','3',"uploads\Bulgogi.jpg",2),
+    ('Egg Mayo Salad',"Salad", '9.10','3',"uploads\egg.jpg",2),
+    ('Veggie Patty Salad',"Salad", '11.30','3',"uploads\veggie.jpg",2),
+    ("Chocolate Croissant", "Croissant", '1.80','1',"uploads\chocolate.jpg",3),("Apple Lattice", "Lattice", '1.80','1',"uploads\apple.jpg",3),("Peach Tart", "Tart", '2.50','1',"uploads\peach.jpg",3),
+    ("Strawberry Tart", "Tart", '2.50','1',"uploads\strawberry.jpg",3),("Chicken Pie", "Pie", '1.80','1',"uploads\chicken.jpg",3),("Curry Puff", "Puff", '1.80','1',"uploads\curry.jpg",3),
+    ("Tuna Puff", "Puff", '1.80','1',"uploads\tuna.jpg",3),("Vegetable Pie", "Pie", '1.80','1',"uploads\vegetable.jpg",3);
 
 -- Create the addons table
 CREATE TABLE addons (
@@ -154,17 +154,26 @@ VALUES
 
 
 -- Create Order table
-CREATE TABLE orders(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     vendor_id INT NOT NULL,
-    food_id INT NOT NULL,
-    addons_id INT,
     total_price DECIMAL(10,2) NOT NULL,
     pickup_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (vendor_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (food_id) REFERENCES food_items(id) ON DELETE CASCADE,
-    FOREIGN KEY (addons_id) REFERENCES addons(id) ON DELETE CASCADE
+	FOREIGN KEY (vendor_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
-)
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    food_id INT NOT NULL,
+    quantity INT NOT NULL,
+    addons_ids JSON,  
+    item_price DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (food_id) REFERENCES food_items(id) ON DELETE CASCADE
+);
