@@ -20,4 +20,3 @@ Password: subway
 4. As a user, please click on SCIS1 under the Population Location section, as this location has available data.
 
 5. Please run the sql scripts first!
-6. 
